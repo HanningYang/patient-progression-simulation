@@ -157,8 +157,8 @@ st.sidebar.markdown("### Simulation Parameters")
 st.sidebar.info("""
 **Parameters:**
 
-- **Growth Rates (r_C, r_H, r_W, r_A, r_I)**: Control the growth rate of each cell type.
-- **Interaction Parameters (alpha, beta, theta)**: Define how different cell types influence each other.
+# - **Growth Rates (r_C, r_H, r_W, r_A, r_I)**: Control the growth rate of each cell type.
+- **Interaction Parameters (alpha, beta, theta)**: Define how different biomarkers influence each other.
 - **Noise Level**: Adjusts the variability in the simulation data.
 - **Initial Conditions**: Mean values for the initial quantities of each cell type.
 """)
