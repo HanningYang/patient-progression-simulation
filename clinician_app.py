@@ -168,7 +168,7 @@ st.sidebar.info("""
 # Parameters to adjust
 st.sidebar.markdown("### Growth/Deacay Rate of Different Biomarkers")
 r_C1 = st.sidebar.slider('CRP', 0.0, 1.0, 0.18, 0.01)
-r_H1 = st.sidebar.slider('Haemoglobin)', -0.1, 0.1, 0.05, 0.01)
+r_H1 = st.sidebar.slider('Haemoglobin', -0.1, 0.1, 0.05, 0.01)
 r_W1 = st.sidebar.slider('BMI', 0.0, 1.0, 0.1, 0.01)
 r_A1 = st.sidebar.slider('Albumin', 0.0, 0.1, 0.01, 0.005)
 r_I1 = st.sidebar.slider('Iron', -1.0, 0.0, -0.2, 0.05)
@@ -183,8 +183,9 @@ alpha_IW1 = st.sidebar.slider('Iron and BMI', 0.0, 0.1, 0.01, 0.005)
 beta_HC1 = st.sidebar.slider('Haemoglobin and CRP', 0.0, 0.1, 0.01, 0.005)
 theta_HI1 = st.sidebar.slider('Haemoglobin and Iron', 0.0, 0.1, 0.01, 0.005)
 
-noise_level = st.sidebar.slider('Noise Level', 0.0, 2.0, 1.0, 0.1)
+st.sidebar.markdown("### Variability")
 add_noise = st.sidebar.checkbox('Add Noise', True)
+noise_level = st.sidebar.slider('Noise Level', 0.0, 2.0, 1.0, 0.1)
 
 # Initial conditions
 st.sidebar.markdown("### Values at Birth (Intermediate Group)")
