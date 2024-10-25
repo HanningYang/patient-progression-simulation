@@ -153,6 +153,7 @@ st.sidebar.title("Adjust Parameters")
 
 st.sidebar.markdown("### Simulation Parameters")
 
+/*
 # Explanation for parameters
 st.sidebar.info("""
 **Parameters:**
@@ -162,6 +163,7 @@ st.sidebar.info("""
 - **Noise Level**: Adjusts the variability in the simulation data.
 - **Initial Conditions**: Mean values for the initial quantities of each cell type.
 """)
+*/
 
 # Parameters to adjust
 r_C1 = st.sidebar.slider('Growth/Deacay Rate of CRP', 0.0, 1.0, 0.18, 0.01)
