@@ -156,17 +156,17 @@ st.sidebar.title("Adjust Parameters")
 
 # st.sidebar.markdown("### Simulation Parameters")
 
-'''
-# Explanation for parameters
-st.sidebar.info("""
-**Parameters:**
 
-- **Growth Rates (r_C, r_H, r_W, r_A, r_I)**: Control the growth rate of each cell type.
-- **Interaction Parameters (alpha, beta, theta)**: Define how different biomarkers influence each other.
-- **Noise Level**: Adjusts the variability in the simulation data.
-- **Initial Conditions**: Mean values for the initial quantities of each cell type.
-""")
-'''
+# Explanation for parameters
+# st.sidebar.info("""
+# # **Parameters:**
+
+# - **Growth Rates (r_C, r_H, r_W, r_A, r_I)**: Control the growth rate of each cell type.
+# - **Interaction Parameters (alpha, beta, theta)**: Define how different biomarkers influence each other.
+# - **Noise Level**: Adjusts the variability in the simulation data.
+# - **Initial Conditions**: Mean values for the initial quantities of each cell type.
+# """)
+
 
 # Parameters to adjust
 st.sidebar.markdown("### Growth/Deacay Rate of Different Biomarkers")
@@ -264,4 +264,3 @@ if st.sidebar.button('Run Simulation'):
 else:
     st.markdown("## Awaiting Simulation")
     st.markdown("Adjust parameters and click **Run Simulation** to see results.")
-
