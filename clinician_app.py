@@ -166,25 +166,27 @@ st.sidebar.info("""
 '''
 
 # Parameters to adjust
+st.sidebar.markdown("### Growth/Deacay Rate of Different Biomarkers")
 r_C1 = st.sidebar.slider('Growth/Deacay Rate of CRP', 0.0, 1.0, 0.18, 0.01)
-r_H1 = st.sidebar.slider('Growth/Deacay Rate of haemoglobin)', -0.1, 0.1, 0.05, 0.01)
+r_H1 = st.sidebar.slider('Growth/Deacay Rate of Haemoglobin)', -0.1, 0.1, 0.05, 0.01)
 r_W1 = st.sidebar.slider('Growth/Deacay Rate of BMI', 0.0, 1.0, 0.1, 0.01)
-r_A1 = st.sidebar.slider('Growth/Deacay Rate of albumin', 0.0, 0.1, 0.01, 0.005)
-r_I1 = st.sidebar.slider('Growth/Deacay Rate of iron', -1.0, 0.0, -0.2, 0.05)
+r_A1 = st.sidebar.slider('Growth/Deacay Rate of Albumin', 0.0, 0.1, 0.01, 0.005)
+r_I1 = st.sidebar.slider('Growth/Deacay Rate of Iron', -1.0, 0.0, -0.2, 0.05)
 
-alpha_CW1 = st.sidebar.slider('correlation between CRP and BMI', 0.0, 0.1, 0.01, 0.005)
-alpha_HW1 = st.sidebar.slider('correlation between haemoglobin and BMI', 0.0, 0.1, 0.01, 0.005)
-alpha_AW1 = st.sidebar.slider('correlation between albumin and BMI', 0.0, 0.1, 0.01, 0.005)
-alpha_IW1 = st.sidebar.slider('correlation between iron and BMI', 0.0, 0.1, 0.01, 0.005)
-beta_HC1 = st.sidebar.slider('correlation between haemoglobin and CRP', 0.0, 0.1, 0.01, 0.005)
-theta_HI1 = st.sidebar.slider('correlation between haemoglobin and iron', 0.0, 0.1, 0.01, 0.005)
+st.sidebar.markdown("### How Different Biomarkers Influence Each Other")
+alpha_CW1 = st.sidebar.slider('Correlation between CRP and BMI', 0.0, 0.1, 0.01, 0.005)
+alpha_HW1 = st.sidebar.slider('Correlation between Haemoglobin and BMI', 0.0, 0.1, 0.01, 0.005)
+alpha_AW1 = st.sidebar.slider('Correlation between Albumin and BMI', 0.0, 0.1, 0.01, 0.005)
+alpha_IW1 = st.sidebar.slider('Correlation between Iron and BMI', 0.0, 0.1, 0.01, 0.005)
+beta_HC1 = st.sidebar.slider('Correlation between Haemoglobin and CRP', 0.0, 0.1, 0.01, 0.005)
+theta_HI1 = st.sidebar.slider('Correlation between Haemoglobin and Iron', 0.0, 0.1, 0.01, 0.005)
 delta1 = st.sidebar.slider('Delta', -1.0, 1.0, 0.3, 0.1)
 
 noise_level = st.sidebar.slider('Noise Level', 0.0, 2.0, 1.0, 0.1)
 add_noise = st.sidebar.checkbox('Add Noise', True)
 
 # Initial conditions
-st.sidebar.markdown("### values at birth (Intermediate Group)")
+st.sidebar.markdown("### Values at Birth (Intermediate Group)")
 inter_mu_simu = st.sidebar.number_input('Mean of C CRP (Intermediate Group)', value=2.2)
 mean_H_simu_inter = st.sidebar.number_input('Mean of haemoglobin (Intermediate Group)', value=10.6)
 mean_W_simu_inter = st.sidebar.number_input('Mean of BMI (Intermediate Group)', value=14.0)
