@@ -151,7 +151,7 @@ Welcome to the **RDEB Patient Progression Simulation App**. This app allows you 
 # Sidebar parameters
 st.sidebar.title("Adjust Parameters")
 
-st.sidebar.markdown("### Simulation Parameters")
+# st.sidebar.markdown("### Simulation Parameters")
 
 '''
 # Explanation for parameters
@@ -167,20 +167,21 @@ st.sidebar.info("""
 
 # Parameters to adjust
 st.sidebar.markdown("### Growth/Deacay Rate of Different Biomarkers")
-r_C1 = st.sidebar.slider('Growth/Deacay Rate of CRP', 0.0, 1.0, 0.18, 0.01)
-r_H1 = st.sidebar.slider('Growth/Deacay Rate of Haemoglobin)', -0.1, 0.1, 0.05, 0.01)
-r_W1 = st.sidebar.slider('Growth/Deacay Rate of BMI', 0.0, 1.0, 0.1, 0.01)
-r_A1 = st.sidebar.slider('Growth/Deacay Rate of Albumin', 0.0, 0.1, 0.01, 0.005)
-r_I1 = st.sidebar.slider('Growth/Deacay Rate of Iron', -1.0, 0.0, -0.2, 0.05)
+r_C1 = st.sidebar.slider('CRP', 0.0, 1.0, 0.18, 0.01)
+r_H1 = st.sidebar.slider('Haemoglobin)', -0.1, 0.1, 0.05, 0.01)
+r_W1 = st.sidebar.slider('BMI', 0.0, 1.0, 0.1, 0.01)
+r_A1 = st.sidebar.slider('Albumin', 0.0, 0.1, 0.01, 0.005)
+r_I1 = st.sidebar.slider('Iron', -1.0, 0.0, -0.2, 0.05)
+st.sidebar.markdown("### Difference in Growth/Decay Rate for Severe Group Relative to Intermediate Group to Differentiate Patient Severity")
+delta1 = st.sidebar.slider('CRP Growth/Decay Difference', -1.0, 1.0, 0.3, 0.1)
 
 st.sidebar.markdown("### How Different Biomarkers Influence Each Other")
-alpha_CW1 = st.sidebar.slider('Correlation between CRP and BMI', 0.0, 0.1, 0.01, 0.005)
-alpha_HW1 = st.sidebar.slider('Correlation between Haemoglobin and BMI', 0.0, 0.1, 0.01, 0.005)
-alpha_AW1 = st.sidebar.slider('Correlation between Albumin and BMI', 0.0, 0.1, 0.01, 0.005)
-alpha_IW1 = st.sidebar.slider('Correlation between Iron and BMI', 0.0, 0.1, 0.01, 0.005)
-beta_HC1 = st.sidebar.slider('Correlation between Haemoglobin and CRP', 0.0, 0.1, 0.01, 0.005)
-theta_HI1 = st.sidebar.slider('Correlation between Haemoglobin and Iron', 0.0, 0.1, 0.01, 0.005)
-delta1 = st.sidebar.slider('Delta', -1.0, 1.0, 0.3, 0.1)
+alpha_CW1 = st.sidebar.slider('CRP and BMI', 0.0, 0.1, 0.01, 0.005)
+alpha_HW1 = st.sidebar.slider('Haemoglobin and BMI', 0.0, 0.1, 0.01, 0.005)
+alpha_AW1 = st.sidebar.slider('Albumin and BMI', 0.0, 0.1, 0.01, 0.005)
+alpha_IW1 = st.sidebar.slider('Iron and BMI', 0.0, 0.1, 0.01, 0.005)
+beta_HC1 = st.sidebar.slider('Haemoglobin and CRP', 0.0, 0.1, 0.01, 0.005)
+theta_HI1 = st.sidebar.slider('Haemoglobin and Iron', 0.0, 0.1, 0.01, 0.005)
 
 noise_level = st.sidebar.slider('Noise Level', 0.0, 2.0, 1.0, 0.1)
 add_noise = st.sidebar.checkbox('Add Noise', True)
