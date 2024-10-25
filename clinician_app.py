@@ -137,10 +137,10 @@ def plot_simulation(final_data):
 plt.style.use('ggplot')
 
 
-st.title("Patient Progression Simulation")
+st.title("RDEB Patient Progression Simulation")
 
 st.markdown("""
-Welcome to the **Patient Progression Simulation App**. This app allows you to adjust simulation parameters and visualize the impact on patient outcomes.
+Welcome to the **RDEB Patient Progression Simulation App**. This app allows you to adjust simulation parameters and visualize the impact on RDEB patient outcomes.
 
 **Instructions:**
 - Adjust the parameters in the sidebar.
@@ -164,37 +164,37 @@ st.sidebar.info("""
 """)
 
 # Parameters to adjust
-r_C1 = st.sidebar.slider('Growth Rate of C Cells (r_C)', 0.0, 1.0, 0.18, 0.01)
-r_H1 = st.sidebar.slider('Growth Rate of H Cells (r_H)', -0.1, 0.1, 0.05, 0.01)
-r_W1 = st.sidebar.slider('Growth Rate of W Cells (r_W)', 0.0, 1.0, 0.1, 0.01)
-r_A1 = st.sidebar.slider('Growth Rate of A Cells (r_A)', 0.0, 0.1, 0.01, 0.005)
-r_I1 = st.sidebar.slider('Growth Rate of I Cells (r_I)', -1.0, 0.0, -0.2, 0.05)
+r_C1 = st.sidebar.slider('Growth/Deacay Rate of CRP', 0.0, 1.0, 0.18, 0.01)
+r_H1 = st.sidebar.slider('Growth/Deacay Rate of haemoglobin)', -0.1, 0.1, 0.05, 0.01)
+r_W1 = st.sidebar.slider('Growth/Deacay Rate of BMI', 0.0, 1.0, 0.1, 0.01)
+r_A1 = st.sidebar.slider('Growth/Deacay Rate of albumin', 0.0, 0.1, 0.01, 0.005)
+r_I1 = st.sidebar.slider('Growth/Deacay Rate of iron', -1.0, 0.0, -0.2, 0.05)
 
-alpha_CW1 = st.sidebar.slider('Alpha CW', 0.0, 0.1, 0.01, 0.005)
-alpha_HW1 = st.sidebar.slider('Alpha HW', 0.0, 0.1, 0.01, 0.005)
-alpha_AW1 = st.sidebar.slider('Alpha AW', 0.0, 0.1, 0.01, 0.005)
-alpha_IW1 = st.sidebar.slider('Alpha IW', 0.0, 0.1, 0.01, 0.005)
-beta_HC1 = st.sidebar.slider('Beta HC', 0.0, 0.1, 0.01, 0.005)
-theta_HI1 = st.sidebar.slider('Theta HI', 0.0, 0.1, 0.01, 0.005)
+alpha_CW1 = st.sidebar.slider('correlation between CRP and BMI', 0.0, 0.1, 0.01, 0.005)
+alpha_HW1 = st.sidebar.slider('correlation between haemoglobin and BMI', 0.0, 0.1, 0.01, 0.005)
+alpha_AW1 = st.sidebar.slider('correlation between albumin and BMI', 0.0, 0.1, 0.01, 0.005)
+alpha_IW1 = st.sidebar.slider('correlation between iron and BMI', 0.0, 0.1, 0.01, 0.005)
+beta_HC1 = st.sidebar.slider('correlation between haemoglobin and CRP', 0.0, 0.1, 0.01, 0.005)
+theta_HI1 = st.sidebar.slider('correlation between haemoglobin and iron', 0.0, 0.1, 0.01, 0.005)
 delta1 = st.sidebar.slider('Delta', -1.0, 1.0, 0.3, 0.1)
 
 noise_level = st.sidebar.slider('Noise Level', 0.0, 2.0, 1.0, 0.1)
 add_noise = st.sidebar.checkbox('Add Noise', True)
 
 # Initial conditions
-st.sidebar.markdown("### Initial Conditions (Intervention Group)")
-inter_mu_simu = st.sidebar.number_input('Mean of C Cells (Intervention)', value=2.2)
-mean_H_simu_inter = st.sidebar.number_input('Mean of H Cells (Intervention)', value=10.6)
-mean_W_simu_inter = st.sidebar.number_input('Mean of W Cells (Intervention)', value=14.0)
-mean_A_simu_inter = st.sidebar.number_input('Mean of A Cells (Intervention)', value=3.8)
-mean_I_simu_inter = st.sidebar.number_input('Mean of I Cells (Intervention)', value=32.5)
+st.sidebar.markdown("### values at birth (Intermediate Group)")
+inter_mu_simu = st.sidebar.number_input('Mean of C CRP (Intermediate Group)', value=2.2)
+mean_H_simu_inter = st.sidebar.number_input('Mean of haemoglobin (Intermediate Group)', value=10.6)
+mean_W_simu_inter = st.sidebar.number_input('Mean of BMI (Intermediate Group)', value=14.0)
+mean_A_simu_inter = st.sidebar.number_input('Mean of albumin (Intermediate Group)', value=3.8)
+mean_I_simu_inter = st.sidebar.number_input('Mean of iron (Intermediate Group)', value=32.5)
 
-st.sidebar.markdown("### Initial Conditions (Standard of Care Group)")
-se_mu_simu = st.sidebar.number_input('Mean of C Cells (Standard of Care)', value=3.9)
-mean_H_simu_se = st.sidebar.number_input('Mean of H Cells (Standard of Care)', value=8.4)
-mean_W_simu_se = st.sidebar.number_input('Mean of W Cells (Standard of Care)', value=14.0)
-mean_A_simu_se = st.sidebar.number_input('Mean of A Cells (Standard of Care)', value=2.8)
-mean_I_simu_se = st.sidebar.number_input('Mean of I Cells (Standard of Care)', value=16.4)
+st.sidebar.markdown("### values at birth (Severe Group)")
+se_mu_simu = st.sidebar.number_input('Mean of C CRP (Severe Group)', value=3.9)
+mean_H_simu_se = st.sidebar.number_input('Mean of haemoglobin (Severe Group)', value=8.4)
+mean_W_simu_se = st.sidebar.number_input('Mean of BMI (Severe Group)', value=14.0)
+mean_A_simu_se = st.sidebar.number_input('Mean of albumin (Severe Group)', value=2.8)
+mean_I_simu_se = st.sidebar.number_input('Mean of iron (Severe Group)', value=16.4)
 
 # Run simulation button
 if st.sidebar.button('Run Simulation'):
