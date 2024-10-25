@@ -125,7 +125,10 @@ def plot_simulation(final_data):
         time = patient_data[:, -1]
         for i, label in enumerate(['C Cells', 'H Cells', 'W Cells', 'A Cells', 'I Cells']):
             ax.plot(time, patient_data[:, i], label=label)
-        ax.set_title(f'Patient {idx + 1} Progression')
+        if idx < num_patients//2:
+            ax.set_title(f'Intermediate Patient {idx + 1} Progression')
+        else:
+            ax.set_title(f'Severe Patient {idx + 1 - num_patients//2} Progression')
         ax.set_xlabel('Time')
         ax.set_ylabel('Cell Counts')
         ax.legend()
