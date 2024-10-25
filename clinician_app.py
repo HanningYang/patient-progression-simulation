@@ -133,7 +133,7 @@ def plot_simulation(final_data):
         else:
             ax.set_title(f'Severe Patient {idx + 1 - num_patients//2} Progression')
         ax.set_xlabel('Time')
-        ax.set_ylabel('Cell Counts')
+        ax.set_ylabel('Values')
         ax.legend()
         st.pyplot(fig)
 
