@@ -123,7 +123,7 @@ def plot_simulation(final_data):
     for idx, patient_data in enumerate(final_data):
         fig, ax = plt.subplots(figsize=(10, 6))
         time = patient_data[:, -1]
-        for i, label in enumerate(['C Cells', 'H Cells', 'W Cells', 'A Cells', 'I Cells']):
+        for i, label in enumerate(['CRP', 'Haemoglobin', 'BMI', 'Albumin', 'Iron']):
             ax.plot(time, patient_data[:, i], label=label)
         if idx < num_patients//2:
             ax.set_title(f'Intermediate Patient {idx + 1} Progression')
