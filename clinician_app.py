@@ -44,8 +44,11 @@ def apply_noise(data, size, noise_std):
     noise_I = np.random.normal(0, noise_std[4], size)
     noise = np.stack([noise_C, noise_H, noise_W, noise_A, noise_I], axis=1)
     data_with_noise = data + noise
-    # Adjust negative values
-    data_with_noise[data_with_noise < 0] = 0
+    # Adjust noise to ensure no negative values in data_with_noise
+    negative_indices = data_with_noise < 0
+    abs_noise = np.abs(noise)
+    data_with_noise[negative_indices] = data_with_noise[negative_indices] - noise[negative_indices] + abs_noise[negative_indices]
+
     return data_with_noise
 
 def process_data(data, size, noise, noise_std):
