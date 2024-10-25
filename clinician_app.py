@@ -133,7 +133,9 @@ def plot_simulation(final_data):
 
 
 # Set plot style
-plt.style.use('seaborn-darkgrid')
+# plt.style.use('seaborn-darkgrid')
+plt.style.use('ggplot')
+
 
 st.title("Patient Progression Simulation")
 
