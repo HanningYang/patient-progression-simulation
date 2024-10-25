@@ -121,21 +121,45 @@ def generate_initial_conditions(num_patient, mu_simu, mean_H, mean_W, mean_A, me
     simu_init = np.stack([C_simu, H_simu, W_simu, A_simu, I_simu])
     return simu_init
 
+
 def plot_simulation(final_data):
+    # Define colors for each biomarker
+    colors = ['royalblue', 'mediumseagreen', 'salmon', 'gold', 'plum']
+    y_limits = [(0, 200), (0, 20), (5, 30), (0.0, 8.0), (0, 150)]
+    biomarkers = ['CRP', 'Haemoglobin', 'BMI', 'Albumin', 'Iron']
+
+    # Plot each patient’s data in separate figures
     num_patients = len(final_data)
     for idx, patient_data in enumerate(final_data):
-        fig, ax = plt.subplots(figsize=(10, 6))
+        fig, axes = plt.subplots(nrows=6, ncols=1, figsize=(10, 30), sharex=True)
         time = patient_data[:, -1]
-        for i, label in enumerate(['CRP', 'Haemoglobin', 'BMI', 'Albumin', 'Iron']):
-            ax.plot(time, patient_data[:, i], label=label)
-        if idx < num_patients//2:
-            ax.set_title(f'Intermediate Patient {idx + 1} Progression')
+        
+        # Plot each biomarker separately
+        for i, ax in enumerate(axes[:5]):
+            ax.plot(time, patient_data[:, i], label=biomarkers[i], color=colors[i])
+            ax.set_ylim(y_limits[i])
+            ax.set_ylabel(biomarkers[i])
+            ax.legend()
+        
+        # Combined plot for all biomarkers in the last subplot
+        for i, biomarker in enumerate(biomarkers):
+            axes[5].plot(time, patient_data[:, i], label=biomarker, color=colors[i])
+        axes[5].set_ylabel('Values')
+        axes[5].set_title('Combined Biomarkers')
+        axes[5].legend()
+        
+        # Set labels and titles
+        axes[-1].set_xlabel('Time')
+        if idx < num_patients // 2:
+            fig.suptitle(f'Intermediate Patient {idx + 1} Progression')
         else:
-            ax.set_title(f'Severe Patient {idx + 1 - num_patients//2} Progression')
-        ax.set_xlabel('Time')
-        ax.set_ylabel('Values')
-        ax.legend()
+            fig.suptitle(f'Severe Patient {idx + 1 - num_patients // 2} Progression')
+
+        fig.tight_layout(rect=[0, 0.02, 1, 0.98])
         st.pyplot(fig)
+
+
+
 
 
 # Set plot style
@@ -225,7 +249,7 @@ if st.sidebar.button('Run Simulation'):
     noise_std = [noise_C_std, noise_H_std, noise_W_std, noise_A_std, noise_I_std]
 
     # Generate initial conditions based on the input means
-    num_patient = 6
+    num_patient = 3
     simu_init_inter = generate_initial_conditions(
         num_patient,
         inter_mu_simu,
@@ -249,10 +273,10 @@ if st.sidebar.button('Run Simulation'):
     
     # Maxes
     K_C = 200.0
-    K_H = 15.0
-    K_W = 25.0
+    K_H = 14.0
+    K_W = 20.0
     K_A = 5.0
-    K_I = 160.0
+    K_I = 110.0
     maxes = K_C, K_H, K_W, K_A, K_I
 
     # Run the simulation
@@ -260,6 +284,15 @@ if st.sidebar.button('Run Simulation'):
         simu_init_inter, simu_init_se, time_points_simu,
         maxes, params1, noise_std, noise=add_noise, type='hypo'
     )
+
+    # Check for zero values in final_data
+    contains_zero = any((patient_data[:, :-1] <= 0).any() for patient_data in final_data)
+    if contains_zero:
+        st.warning("The generated data contains zero values. Please review your parameters or initial conditions.")
+    else:
+        st.write("No zero or negative values generated")
+
+
     
     # Visualize the results
     st.markdown("## Simulation Results")
