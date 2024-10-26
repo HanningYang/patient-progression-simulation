@@ -5,6 +5,9 @@ import seaborn as sns
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
+params1 = []
+
+
 def save_parameters(name, comment, parameters):
     # Use credentials from Streamlit secrets
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(
@@ -177,10 +180,6 @@ def plot_simulation(final_data):
 
         fig.tight_layout(rect=[0, 0.02, 1, 0.98])
         st.pyplot(fig)
-
-
-params1 = []
-
 
 
 # Set plot style
