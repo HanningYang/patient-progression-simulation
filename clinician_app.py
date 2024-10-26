@@ -268,6 +268,7 @@ if st.sidebar.button('Run Simulation'):
     params1 = [r_C1, r_H1, r_W1, r_A1, r_I1,
                alpha_CW1, alpha_HW1, alpha_AW1, alpha_IW1,
                beta_HC1, theta_HI1, delta1]
+    st.session_state['params1'] = params1
 
     
     # Adjust noise level
