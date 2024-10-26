@@ -26,7 +26,6 @@ def save_parameters(name, comment, parameters, add_variability, variability_leve
         
         # Append the data as a new row
         sheet.append_row(data)
-        st.success("Parameters saved successfully!")
     except gspread.exceptions.APIError as e:
         st.error(f"API Error: {e}")
 
