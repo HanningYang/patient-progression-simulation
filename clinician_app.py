@@ -335,7 +335,7 @@ else:
 
 # Collect information from the UI elements and session_state
 add_variability_state = 'T' if add_noise else 'F'
-variability_level_value = variability_level if add_noise else "N/A"
+variability_level_value = noise_level if add_noise else "N/A"
 
 # Collect mean values at birth for intermediate and severe groups
 birth_means = [
