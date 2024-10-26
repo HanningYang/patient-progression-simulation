@@ -5,7 +5,8 @@ import seaborn as sns
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-params1 = []
+if 'params1' not in st.session_state:
+    st.session_state['params1'] = []
 
 
 def save_parameters(name, comment, parameters):
@@ -261,9 +262,10 @@ mean_I_simu_se = st.sidebar.number_input('Mean of iron (Severe Group)', value=16
 # Run simulation button
 if st.sidebar.button('Run Simulation'):
     # Convert parameters to the appropriate format
-    params1 = [r_C1, r_H1, r_W1, r_A1, r_I1,
-               alpha_CW1, alpha_HW1, alpha_AW1, alpha_IW1,
-               beta_HC1, theta_HI1, delta1]
+    st.session_state['params1'] = [r_C1, r_H1, r_W1, r_A1, r_I1,
+                                   alpha_CW1, alpha_HW1, alpha_AW1, alpha_IW1,
+                                   beta_HC1, theta_HI1, delta1]
+
     
     # Adjust noise level
     sigma_simu_prime = 1.3  # Adjusted based on your sigma_simu_prime
@@ -335,10 +337,10 @@ user_comment = st.sidebar.text_area("Comments (Why did you choose these paramete
 if st.sidebar.button('Save Parameters'):
     if not user_name:
         st.warning("Please enter your name before saving.")
-    elif not params1:
+    elif not st.session_state['params1']:
         st.warning("Please run the simulation first to generate parameters.")
     else:
-        save_parameters(user_name, user_comment, [float(p) for p in params1])
+        save_parameters(user_name, user_comment, [float(p) for p in st.session_state['params1']])
         st.success("Parameters saved successfully!")
 
 
