@@ -170,7 +170,7 @@ plt.style.use('ggplot')
 st.title("RDEB Patient Progression Simulation")
 
 st.markdown("""
-Welcome to the **RDEB Patient Progression Simulation App**. This app allows you to adjust simulation parameters and visualize the impact on RDEB patient outcomes.
+This is **RDEB Patient Progression Simulation App**. This app allows you to adjust simulation parameters and visualize the impact on RDEB patient outcomes.
 
 **Instructions:**
 - Adjust the parameters in the sidebar.
@@ -205,6 +205,8 @@ r_A1 = st.sidebar.number_input('Albumin', min_value=-1.0, max_value=1.0, value=0
 r_I1 = st.sidebar.number_input('Iron', min_value=-1.0, max_value=1.0, value=-0.2, step=0.001, format="%.3f")
 
 st.sidebar.markdown("### Difference in Growth/Decay Rate for Severe Group Relative to Intermediate Group to Differentiate Patient Severity")
+st.sidebar.markdown("#### A positive correlation means that as one variable increases or decreases, the other tends to change in the same direction. A negative correlation means that as one variable increases, the other tends to decrease, and vice versa. The larger the absolute value, the stronger the correlation.")
+
 delta1 = st.sidebar.number_input('CRP Growth/Decay Difference', min_value=-1.0, max_value=1.0, value=0.3, step=0.001, format="%.3f")
 
 st.sidebar.markdown("### How Different Biomarkers Influence Each Other")
@@ -217,8 +219,9 @@ theta_HI1 = st.sidebar.number_input('Haemoglobin and Iron', min_value=-1.0, max_
 
 
 st.sidebar.markdown("### Variability")
-add_noise = st.sidebar.checkbox('Add Noise', True)
-noise_level = st.sidebar.number_input('Noise Level', min_value=0.0, max_value=2.0, value=1.0, step=0.1, format="%.1f")
+st.sidebar.markdown("#### If you choose to add variability, you can leave the variability level alone.")
+add_noise = st.sidebar.checkbox('Add Variability', True)
+noise_level = st.sidebar.number_input('Variability Level', min_value=0.0, max_value=2.0, value=1.0, step=0.1, format="%.1f")
 
 # Initial conditions
 st.sidebar.markdown("### Values at Birth (Intermediate Group)")
@@ -228,7 +231,7 @@ mean_W_simu_inter = st.sidebar.number_input('Mean of BMI (Intermediate Group)', 
 mean_A_simu_inter = st.sidebar.number_input('Mean of albumin (Intermediate Group)', value=3.8)
 mean_I_simu_inter = st.sidebar.number_input('Mean of iron (Intermediate Group)', value=32.5)
 
-st.sidebar.markdown("### values at birth (Severe Group)")
+st.sidebar.markdown("### Values at Birth (Severe Group)")
 se_mu_simu = st.sidebar.number_input('Mean of C CRP (Severe Group)', value=3.9)
 mean_H_simu_se = st.sidebar.number_input('Mean of haemoglobin (Severe Group)', value=8.4)
 mean_W_simu_se = st.sidebar.number_input('Mean of BMI (Severe Group)', value=14.0)
