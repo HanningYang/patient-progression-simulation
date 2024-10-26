@@ -292,7 +292,7 @@ if st.sidebar.button('Run Simulation'):
     if contains_zero:
         st.warning("The generated data contains zero values. Please review your parameters or initial conditions.")
     else:
-        st.write("No zero or negative values generated")
+        st.success("No zero or negative values generated")
 
 
     
