@@ -8,7 +8,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 params1 = []
 
 
-def save_parameters(name, comment, parameters):
+def save_parameters(name, comment, parameters, add_variability, variability_level, birth_means):
     try:
         # Use credentials from Streamlit secrets
         credentials = ServiceAccountCredentials.from_json_keyfile_dict(
@@ -21,13 +21,14 @@ def save_parameters(name, comment, parameters):
         sheet = client.open("ODE-parameters").sheet1
         
         # Prepare the data to append
-        data = [name, comment] + parameters
+        data = [name, comment] + parameters + [add_variability, variability_level] + birth_means
         
         # Append the data as a new row
         sheet.append_row(data)
         st.success("Parameters saved successfully!")
     except gspread.exceptions.APIError as e:
         st.error(f"API Error: {e}")
+
 
 
 
