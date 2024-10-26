@@ -2,6 +2,26 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+def save_parameters(name, comment, parameters):
+    # Use credentials from Streamlit secrets
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(
+        st.secrets["google_service_account"],
+        scopes=["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    )
+    client = gspread.authorize(credentials)
+    
+    # Open your Google Sheet (replace with your sheet name or URL)
+    sheet = client.open("ODE-parameters").sheet1  # or use .worksheet("Sheet1")
+    
+    # Prepare the data to append
+    data = [name, comment] + parameters
+    
+    # Append the data as a new row
+    sheet.append_row(data)
+
 
 ### Function Definitions
 
@@ -306,3 +326,15 @@ if st.sidebar.button('Run Simulation'):
 else:
     st.markdown("## Awaiting Simulation")
     st.markdown("Adjust parameters and click **Run Simulation** to see results.")
+
+st.sidebar.markdown("### Save Your Parameters")
+user_name = st.sidebar.text_input("Your Name")
+user_comment = st.sidebar.text_area("Comments (Why did you choose these parameters?)")
+
+if st.sidebar.button('Save Parameters'):
+    if not user_name:
+        st.warning("Please enter your name before saving.")
+    else:
+        save_parameters(user_name, user_comment, [float(p) for p in params1])
+        st.success("Parameters saved successfully!")
+
