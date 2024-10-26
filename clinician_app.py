@@ -207,12 +207,12 @@ st.sidebar.markdown("### Difference in Growth/Decay Rate for Severe Group Relati
 delta1 = st.sidebar.number_input('CRP Growth/Decay Difference', min_value=-1.0, max_value=1.0, value=0.3, step=0.001, format="%.3f")
 
 st.sidebar.markdown("### How Different Biomarkers Influence Each Other")
-alpha_CW1 = st.sidebar.number_input('CRP and BMI', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
-alpha_HW1 = st.sidebar.number_input('Haemoglobin and BMI', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
-alpha_AW1 = st.sidebar.number_input('Albumin and BMI', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
-alpha_IW1 = st.sidebar.number_input('Iron and BMI', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
-beta_HC1 = st.sidebar.number_input('Haemoglobin and CRP', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
-theta_HI1 = st.sidebar.number_input('Haemoglobin and Iron', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
+alpha_CW1 = st.sidebar.number_input('CRP and BMI', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
+alpha_HW1 = st.sidebar.number_input('Haemoglobin and BMI', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
+alpha_AW1 = st.sidebar.number_input('Albumin and BMI', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
+alpha_IW1 = st.sidebar.number_input('Iron and BMI', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
+beta_HC1 = st.sidebar.number_input('Haemoglobin and CRP', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
+theta_HI1 = st.sidebar.number_input('Haemoglobin and Iron', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
 
 
 st.sidebar.markdown("### Variability")
