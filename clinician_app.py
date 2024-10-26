@@ -218,14 +218,14 @@ st.sidebar.title("Adjust Parameters")
 
 # Initial conditions
 st.sidebar.markdown("### Values at Birth (Intermediate Group)")
-inter_mu_simu = st.sidebar.number_input('Mean of C CRP (Intermediate Group)', value=2.2)
+inter_mu_simu = st.sidebar.number_input('Mean of CRP (Intermediate Group)', value=2.2)
 mean_H_simu_inter = st.sidebar.number_input('Mean of haemoglobin (Intermediate Group)', value=10.6)
 mean_W_simu_inter = st.sidebar.number_input('Mean of BMI (Intermediate Group)', value=14.0)
 mean_A_simu_inter = st.sidebar.number_input('Mean of albumin (Intermediate Group)', value=3.8)
 mean_I_simu_inter = st.sidebar.number_input('Mean of iron (Intermediate Group)', value=32.5)
 
 st.sidebar.markdown("### Values at Birth (Severe Group)")
-se_mu_simu = st.sidebar.number_input('Mean of C CRP (Severe Group)', value=3.9)
+se_mu_simu = st.sidebar.number_input('Mean of CRP (Severe Group)', value=3.9)
 mean_H_simu_se = st.sidebar.number_input('Mean of haemoglobin (Severe Group)', value=8.4)
 mean_W_simu_se = st.sidebar.number_input('Mean of BMI (Severe Group)', value=14.0)
 mean_A_simu_se = st.sidebar.number_input('Mean of albumin (Severe Group)', value=2.8)
