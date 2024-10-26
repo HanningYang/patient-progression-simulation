@@ -190,7 +190,7 @@ plt.style.use('ggplot')
 st.title("RDEB Patient Progression Simulation")
 
 st.markdown("""
-This is **RDEB Patient Progression Simulation App**. This app allows you to adjust simulation parameters and visualize the impact on RDEB patient outcomes.
+Welcome to **RDEB Patient Progression Simulation App**. This app allows you to adjust simulation parameters and visualize the impact on RDEB patient outcomes.
 
 **Instructions:**
 - Adjust the parameters in the sidebar.
