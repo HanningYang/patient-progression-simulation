@@ -179,6 +179,7 @@ def plot_simulation(final_data):
         st.pyplot(fig)
 
 
+params1 = []
 
 
 
@@ -331,10 +332,14 @@ st.sidebar.markdown("### Save Your Parameters")
 user_name = st.sidebar.text_input("Your Name")
 user_comment = st.sidebar.text_area("Comments (Why did you choose these parameters?)")
 
+
 if st.sidebar.button('Save Parameters'):
     if not user_name:
         st.warning("Please enter your name before saving.")
+    elif not params1:
+        st.warning("Please run the simulation first to generate parameters.")
     else:
         save_parameters(user_name, user_comment, [float(p) for p in params1])
         st.success("Parameters saved successfully!")
+
 
