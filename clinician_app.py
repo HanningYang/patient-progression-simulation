@@ -8,26 +8,23 @@ from oauth2client.service_account import ServiceAccountCredentials
 params1 = []
 
 
-def save_parameters(name, comment, parameters):
-    try:
-        # Use credentials from Streamlit secrets
-        credentials = ServiceAccountCredentials.from_json_keyfile_dict(
-            st.secrets["google_service_account"],
-            scopes=["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
-        )
-        client = gspread.authorize(credentials)
+def save_parameters(name, comment, parameters, add_variability, variability_level, birth_means):
+    # Use credentials from Streamlit secrets
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(
+        st.secrets["google_service_account"],
+        scopes=["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
+    )
+    client = gspread.authorize(credentials)
+    
+    # Open your Google Sheet (replace with your sheet name or URL)
+    sheet = client.open("ODE-parameters").sheet1  # or use .worksheet("Sheet1")
+    
+    # Prepare the data to append
+    data = [name, comment] + parameters + add_variability + variability_level + birth_means
+    
+    # Append the data as a new row
+    sheet.append_row(data)
 
-        # Access the sheet
-        sheet = client.open("ODE-parameters").sheet1
-        
-        # Prepare the data to append
-        data = [name, comment] + parameters
-        
-        # Append the data as a new row
-        sheet.append_row(data)
-        st.success("Parameters saved successfully!")
-    except gspread.exceptions.APIError as e:
-        st.error(f"API Error: {e}")
 
 
 ### Function Definitions
@@ -335,17 +332,43 @@ else:
     st.markdown("## Awaiting Simulation")
     st.markdown("Adjust parameters and click **Run Simulation** to see results.")
 
+
+# Collect information from the UI elements and session_state
+add_variability_state = 'T' if add_noise else 'F'
+variability_level_value = variability_level if add_noise else "N/A"
+
+# Collect mean values at birth for intermediate and severe groups
+birth_means = [
+    inter_mu_simu, mean_H_simu_inter, mean_W_simu_inter, mean_A_simu_inter, mean_I_simu_inter,
+    se_mu_simu, mean_H_simu_se, mean_W_simu_se, mean_A_simu_se, mean_I_simu_se
+]
+
+# Save parameters section
 st.sidebar.markdown("### Save Your Parameters")
 user_name = st.sidebar.text_input("Your Name")
 user_comment = st.sidebar.text_area("Comments (Why did you choose these parameters?)")
 
-
+# Ensure params1 exists in session state before accessing
 if st.sidebar.button('Save Parameters'):
     if not user_name:
         st.warning("Please enter your name before saving.")
-    elif not st.session_state['params1']:
+    elif 'params1' not in st.session_state:
         st.warning("Please run the simulation first to generate parameters.")
     else:
-        save_parameters(user_name, user_comment, [float(p) for p in st.session_state['params1']])
+        save_parameters(
+            user_name, 
+            user_comment, 
+            [float(p) for p in st.session_state['params1']],
+            add_variability_state, 
+            variability_level_value,
+            birth_means
+        )
+        st.session_state['parameters_saved'] = True  # Set flag to True after saving
+
+# Display the success message only once
+if st.session_state['parameters_saved']:
+    st.success("Parameters saved successfully!")
+    
+
 
 
