@@ -2,3 +2,5 @@ streamlit
 numpy
 matplotlib
 seaborn
+gspread
+oauth2client
