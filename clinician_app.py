@@ -8,22 +8,27 @@ from oauth2client.service_account import ServiceAccountCredentials
 params1 = []
 
 
-def save_parameters(name, comment, parameters, add_variability, variability_level, birth_means):
-    # Use credentials from Streamlit secrets
-    credentials = ServiceAccountCredentials.from_json_keyfile_dict(
-        st.secrets["google_service_account"],
-        scopes=["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
-    )
-    client = gspread.authorize(credentials)
-    
-    # Open your Google Sheet (replace with your sheet name or URL)
-    sheet = client.open("ODE-parameters").sheet1  # or use .worksheet("Sheet1")
-    
-    # Prepare the data to append
-    data = [name, comment] + parameters + add_variability + variability_level + birth_means
-    
-    # Append the data as a new row
-    sheet.append_row(data)
+def save_parameters(name, comment, parameters):
+    try:
+        # Use credentials from Streamlit secrets
+        credentials = ServiceAccountCredentials.from_json_keyfile_dict(
+            st.secrets["google_service_account"],
+            scopes=["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
+        )
+        client = gspread.authorize(credentials)
+
+        # Access the sheet
+        sheet = client.open("ODE-parameters").sheet1
+        
+        # Prepare the data to append
+        data = [name, comment] + parameters
+        
+        # Append the data as a new row
+        sheet.append_row(data)
+        st.success("Parameters saved successfully!")
+    except gspread.exceptions.APIError as e:
+        st.error(f"API Error: {e}")
+
 
 
 
