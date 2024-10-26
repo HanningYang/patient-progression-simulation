@@ -18,7 +18,7 @@ def save_parameters(name, comment, parameters):
     client = gspread.authorize(credentials)
     
     # Open your Google Sheet (replace with your sheet name or URL)
-    sheet = client.open("ODE-parameters").sheet1  # or use .worksheet("Sheet1")
+    sheet = client.open("ODE-parameters").worksheet("Sheet1")
     
     # Prepare the data to append
     data = [name, comment] + parameters
