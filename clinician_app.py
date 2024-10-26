@@ -8,8 +8,8 @@ import seaborn as sns
 def ode_system1(y, t, K_C, K_H, K_W, K_A, K_I, r_C, r_H, r_W, r_A, r_I,
                 alpha_CW, alpha_HW, alpha_AW, alpha_IW, beta_HC, theta_HI):
     C, H, W, A, I = y
-    dCdt = r_C * C * (1 - C / K_C) - alpha_CW * (W / K_W)
-    dHdt = r_H * H * (1 - H / K_H) + alpha_HW * (W / K_W) - beta_HC * (C / K_C) + theta_HI * (I / K_I)
+    dCdt = r_C * C * (1 - C / K_C) + alpha_CW * (W / K_W)
+    dHdt = r_H * H * (1 - H / K_H) + alpha_HW * (W / K_W) + beta_HC * (C / K_C) + theta_HI * (I / K_I)
     dWdt = r_W * W * (1 - W / K_W)
     dAdt = r_A * A * (1 - A / K_A) + alpha_AW * (W / K_W)
     dIdt = r_I * I * (1 - I / K_I) + alpha_IW * (W / K_W)
@@ -18,8 +18,8 @@ def ode_system1(y, t, K_C, K_H, K_W, K_A, K_I, r_C, r_H, r_W, r_A, r_I,
 def ode_system2(y, t, K_C, K_H, K_W, K_A, K_I, r_C, r_H, r_W, r_A, r_I,
                 alpha_CW, alpha_HW, alpha_AW, alpha_IW, beta_HC, theta_HI, delta):
     C, H, W, A, I = y
-    dCdt = (r_C + delta) * C * (1 - C / K_C) - alpha_CW * (W / K_W)
-    dHdt = r_H * H * (1 - H / K_H) + alpha_HW * (W / K_W) - beta_HC * (C / K_C) + theta_HI * (I / K_I)
+    dCdt = (r_C + delta) * C * (1 - C / K_C) + alpha_CW * (W / K_W)
+    dHdt = r_H * H * (1 - H / K_H) + alpha_HW * (W / K_W) + beta_HC * (C / K_C) + theta_HI * (I / K_I)
     dWdt = r_W * W * (1 - W / K_W)
     dAdt = r_A * A * (1 - A / K_A) + alpha_AW * (W / K_W)
     dIdt = r_I * I * (1 - I / K_I) + alpha_IW * (W / K_W)
