@@ -5,8 +5,8 @@ import seaborn as sns
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-if 'params1' not in st.session_state:
-    st.session_state['params1'] = []
+params1 = []
+
 
 
 def save_parameters(name, comment, parameters):
@@ -262,14 +262,13 @@ mean_I_simu_se = st.sidebar.number_input('Mean of iron (Severe Group)', value=16
 # Run simulation button
 if st.sidebar.button('Run Simulation'):
     # Convert parameters to the appropriate format
-    st.session_state['params1'] = [r_C1, r_H1, r_W1, r_A1, r_I1,
-                                   alpha_CW1, alpha_HW1, alpha_AW1, alpha_IW1,
-                                   beta_HC1, theta_HI1, delta1]
+    params1 = [r_C1, r_H1, r_W1, r_A1, r_I1,
+               alpha_CW1, alpha_HW1, alpha_AW1, alpha_IW1,
+               beta_HC1, theta_HI1, delta1]
 
     
     # Adjust noise level
-    sigma_simu_prime = 1.3  # Adjusted based on your sigma_simu_prime
-    noise_C_std = noise_level * sigma_simu_prime
+    noise_C_std = noise_level * 40
     noise_H_std = noise_level * 2.5  # std_H
     noise_W_std = noise_level * 2.3  # std_W
     noise_A_std = noise_level * 0.9  # std_A
