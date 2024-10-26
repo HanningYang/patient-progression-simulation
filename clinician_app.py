@@ -197,6 +197,8 @@ st.sidebar.title("Adjust Parameters")
 
 # Parameters to adjust
 st.sidebar.markdown("### Growth/Deacay Rate of Different Biomarkers")
+st.sidebar.markdown("##### A positive value for the growth/decay rate indicates that the biomarker tends to increase (growth) over time, while a negative value indicates a decrease (decay) over time.
+")
 r_C1 = st.sidebar.number_input('CRP', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
 r_H1 = st.sidebar.number_input('Haemoglobin', min_value=-0.1, max_value=0.1, value=0.05, step=0.001, format="%.3f")
 r_W1 = st.sidebar.number_input('BMI', min_value=-1.0, max_value=1.0, value=0.1, step=0.001, format="%.3f")
