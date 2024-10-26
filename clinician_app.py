@@ -219,6 +219,23 @@ st.sidebar.title("Adjust Parameters")
 # """)
 
 
+# Initial conditions
+st.sidebar.markdown("### Values at Birth (Intermediate Group)")
+inter_mu_simu = st.sidebar.number_input('Mean of C CRP (Intermediate Group)', value=2.2)
+mean_H_simu_inter = st.sidebar.number_input('Mean of haemoglobin (Intermediate Group)', value=10.6)
+mean_W_simu_inter = st.sidebar.number_input('Mean of BMI (Intermediate Group)', value=14.0)
+mean_A_simu_inter = st.sidebar.number_input('Mean of albumin (Intermediate Group)', value=3.8)
+mean_I_simu_inter = st.sidebar.number_input('Mean of iron (Intermediate Group)', value=32.5)
+
+st.sidebar.markdown("### Values at Birth (Severe Group)")
+se_mu_simu = st.sidebar.number_input('Mean of C CRP (Severe Group)', value=3.9)
+mean_H_simu_se = st.sidebar.number_input('Mean of haemoglobin (Severe Group)', value=8.4)
+mean_W_simu_se = st.sidebar.number_input('Mean of BMI (Severe Group)', value=14.0)
+mean_A_simu_se = st.sidebar.number_input('Mean of albumin (Severe Group)', value=2.8)
+mean_I_simu_se = st.sidebar.number_input('Mean of iron (Severe Group)', value=16.4)
+
+
+
 # Parameters to adjust
 st.sidebar.markdown("### Growth/Deacay Rate of Different Biomarkers")
 st.sidebar.markdown("#### A positive value for the growth/decay rate indicates that the biomarker tends to increase (growth) over time, while a negative value indicates a decrease (decay) over time.")
@@ -247,20 +264,6 @@ st.sidebar.markdown("#### If you choose to add variability, you can leave the va
 add_noise = st.sidebar.checkbox('Add Variability', True)
 noise_level = st.sidebar.number_input('Variability Level', min_value=0.0, max_value=2.0, value=1.0, step=0.1, format="%.1f")
 
-# Initial conditions
-st.sidebar.markdown("### Values at Birth (Intermediate Group)")
-inter_mu_simu = st.sidebar.number_input('Mean of C CRP (Intermediate Group)', value=2.2)
-mean_H_simu_inter = st.sidebar.number_input('Mean of haemoglobin (Intermediate Group)', value=10.6)
-mean_W_simu_inter = st.sidebar.number_input('Mean of BMI (Intermediate Group)', value=14.0)
-mean_A_simu_inter = st.sidebar.number_input('Mean of albumin (Intermediate Group)', value=3.8)
-mean_I_simu_inter = st.sidebar.number_input('Mean of iron (Intermediate Group)', value=32.5)
-
-st.sidebar.markdown("### Values at Birth (Severe Group)")
-se_mu_simu = st.sidebar.number_input('Mean of C CRP (Severe Group)', value=3.9)
-mean_H_simu_se = st.sidebar.number_input('Mean of haemoglobin (Severe Group)', value=8.4)
-mean_W_simu_se = st.sidebar.number_input('Mean of BMI (Severe Group)', value=14.0)
-mean_A_simu_se = st.sidebar.number_input('Mean of albumin (Severe Group)', value=2.8)
-mean_I_simu_se = st.sidebar.number_input('Mean of iron (Severe Group)', value=16.4)
 
 # Run simulation button
 if st.sidebar.button('Run Simulation'):
