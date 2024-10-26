@@ -6,7 +6,8 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 params1 = []
-
+if 'parameters_saved' not in st.session_state:
+    st.session_state['parameters_saved'] = False
 
 def save_parameters(name, comment, parameters, add_variability, variability_level, birth_means):
     try:
