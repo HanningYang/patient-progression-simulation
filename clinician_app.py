@@ -344,6 +344,5 @@ if st.sidebar.button('Save Parameters'):
         st.warning("Please run the simulation first to generate parameters.")
     else:
         save_parameters(user_name, user_comment, [float(p) for p in st.session_state['params1']])
-        st.success("Parameters saved successfully!")
 
 
