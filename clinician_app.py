@@ -197,25 +197,27 @@ st.sidebar.title("Adjust Parameters")
 
 # Parameters to adjust
 st.sidebar.markdown("### Growth/Deacay Rate of Different Biomarkers")
-r_C1 = st.sidebar.slider('CRP', -1.0, 1.0, 0.18, 0.001)
-r_H1 = st.sidebar.slider('Haemoglobin', -0.1, 0.1, 0.05, 0.001)
-r_W1 = st.sidebar.slider('BMI', -1.0, 1.0, 0.1, 0.001)
-r_A1 = st.sidebar.slider('Albumin', -1.0, 1.0, 0.01, 0.001)
-r_I1 = st.sidebar.slider('Iron', -1.0, 1.0, -0.2, 0.001)
+r_C1 = st.sidebar.number_input('CRP', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
+r_H1 = st.sidebar.number_input('Haemoglobin', min_value=-0.1, max_value=0.1, value=0.05, step=0.001, format="%.3f")
+r_W1 = st.sidebar.number_input('BMI', min_value=-1.0, max_value=1.0, value=0.1, step=0.001, format="%.3f")
+r_A1 = st.sidebar.number_input('Albumin', min_value=-1.0, max_value=1.0, value=0.01, step=0.001, format="%.3f")
+r_I1 = st.sidebar.number_input('Iron', min_value=-1.0, max_value=1.0, value=-0.2, step=0.001, format="%.3f")
+
 st.sidebar.markdown("### Difference in Growth/Decay Rate for Severe Group Relative to Intermediate Group to Differentiate Patient Severity")
-delta1 = st.sidebar.slider('CRP Growth/Decay Difference', -1.0, 1.0, 0.3, 0.001)
+delta1 = st.sidebar.number_input('CRP Growth/Decay Difference', min_value=-1.0, max_value=1.0, value=0.3, step=0.001, format="%.3f")
 
 st.sidebar.markdown("### How Different Biomarkers Influence Each Other")
-alpha_CW1 = st.sidebar.slider('CRP and BMI', -1.0, 1.0, 0.18, 0.001)
-alpha_HW1 = st.sidebar.slider('Haemoglobin and BMI', -1.0, 1.0, 0.18, 0.001)
-alpha_AW1 = st.sidebar.slider('Albumin and BMI', -1.0, 1.0, 0.18, 0.001)
-alpha_IW1 = st.sidebar.slider('Iron and BMI', -1.0, 1.0, 0.18, 0.001)
-beta_HC1 = st.sidebar.slider('Haemoglobin and CRP', -1.0, 1.0, 0.18, 0.001)
-theta_HI1 = st.sidebar.slider('Haemoglobin and Iron', -1.0, 1.0, 0.18, 0.001)
+alpha_CW1 = st.sidebar.number_input('CRP and BMI', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
+alpha_HW1 = st.sidebar.number_input('Haemoglobin and BMI', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
+alpha_AW1 = st.sidebar.number_input('Albumin and BMI', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
+alpha_IW1 = st.sidebar.number_input('Iron and BMI', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
+beta_HC1 = st.sidebar.number_input('Haemoglobin and CRP', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
+theta_HI1 = st.sidebar.number_input('Haemoglobin and Iron', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
+
 
 st.sidebar.markdown("### Variability")
 add_noise = st.sidebar.checkbox('Add Noise', True)
-noise_level = st.sidebar.slider('Noise Level', 0.0, 2.0, 1.0, 0.1)
+noise_level = st.sidebar.number_input('Noise Level', min_value=0.0, max_value=2.0, value=1.0, step=0.1, format="%.1f")
 
 # Initial conditions
 st.sidebar.markdown("### Values at Birth (Intermediate Group)")
