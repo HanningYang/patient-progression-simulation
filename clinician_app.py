@@ -263,7 +263,7 @@ theta_HI1 = st.sidebar.slider('Haemoglobin and Iron', min_value=-1.0, max_value=
 
 
 st.sidebar.markdown("### Variability")
-st.sidebar.markdown("#### If you choose to add variability, you can leave the variability level alone.")
+st.sidebar.markdown("#### If you choose not to add variability, you can leave the variability level alone.")
 add_noise = st.sidebar.checkbox('Add Variability', True)
 noise_level = st.sidebar.number_input('Variability Level', min_value=0.0, max_value=2.0, value=0.5, step=0.1, format="%.1f")
 
