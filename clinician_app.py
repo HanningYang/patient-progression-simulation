@@ -167,7 +167,7 @@ def plot_simulation(final_data):
         # Plot each biomarker separately
         for i, ax in enumerate(axes[:5]):
             ax.plot(time, patient_data[:, i], label=biomarkers[i], color=colors[i])
-            ax.set_ylim(y_limits[i])
+            # ax.set_ylim(y_limits[i])
             ax.set_ylabel(biomarkers[i])
             ax.legend()
         
