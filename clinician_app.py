@@ -310,10 +310,10 @@ if st.sidebar.button('Run Simulation'):
     
     # Maxes
     K_C = 200.0
-    K_H = 14.0
-    K_W = 20.0
+    K_H = 15.0
+    K_W = 25.0
     K_A = 5.0
-    K_I = 110.0
+    K_I = 160.0
     maxes = K_C, K_H, K_W, K_A, K_I
 
     # Run the simulation
