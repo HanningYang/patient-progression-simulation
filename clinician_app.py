@@ -155,7 +155,7 @@ def generate_initial_conditions(num_patient, mu_simu, mean_H, mean_W, mean_A, me
 def plot_simulation(final_data):
     # Define colors for each biomarker
     colors = ['royalblue', 'mediumseagreen', 'salmon', 'gold', 'plum']
-    y_limits = [(0, 200), (0, 20), (5, 30), (0.0, 8.0), (0, 150)]
+    # y_limits = [(0, 200), (0, 20), (5, 30), (0.0, 8.0), (0, 150)]
     biomarkers = ['CRP', 'Haemoglobin', 'BMI', 'Albumin', 'Iron']
 
     # Plot each patient’s data in separate figures
