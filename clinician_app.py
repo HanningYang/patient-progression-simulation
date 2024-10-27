@@ -245,7 +245,7 @@ st.sidebar.markdown("#### A positive value for the growth/decay rate indicates t
 r_C1 = st.sidebar.slider('CRP', min_value=-1.0, max_value=1.0, value=0.04, step=0.01, format="%.2f")
 r_H1 = st.sidebar.slider('Haemoglobin', min_value=-1.0, max_value=1.0, value=-0.12, step=0.01, format="%.2f")
 r_W1 = st.sidebar.slider('BMI', min_value=-1.0, max_value=1.0, value=-0.05, step=0.01, format="%.2f")
-r_A1 = st.sidebar.slider('Albumin', min_value=-1.0, max_value=1.0, value=-0.1, step=0.01, format="%.2f")
+r_A1 = st.sidebar.slider('Albumin', min_value=-1.0, max_value=1.0, value=-0.05, step=0.01, format="%.2f")
 r_I1 = st.sidebar.slider('Iron', min_value=-1.0, max_value=1.0, value=-0.14, step=0.01, format="%.2f")
 
 st.sidebar.markdown("### Difference in Growth/Decay Rate for Severe Group Relative to Intermediate Group to Differentiate Patient Severity")
@@ -325,7 +325,7 @@ if st.sidebar.button('Run Simulation'):
     # Check for zero values in final_data
     contains_zero = any((patient_data[:, :-1] <= 0).any() for patient_data in final_data)
     if contains_zero:
-        st.warning("The generated data contains zero values. Please review your parameters or initial conditions.")
+        st.warning("The generated data contains zero or negative values. Please review your parameters or initial conditions.")
     else:
         st.success("No zero or negative values generated")
 
