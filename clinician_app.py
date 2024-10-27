@@ -242,30 +242,30 @@ mean_I_simu_se = st.sidebar.number_input('Mean of iron (Severe Group)', value=16
 # Parameters to adjust
 st.sidebar.markdown("### Growth/Deacay Rate of Different Biomarkers")
 st.sidebar.markdown("#### A positive value for the growth/decay rate indicates that the biomarker tends to increase (growth) over time, while a negative value indicates a decrease (decay) over time.")
-r_C1 = st.sidebar.number_input('CRP', min_value=-1.0, max_value=1.0, value=0.18, step=0.001, format="%.3f")
-r_H1 = st.sidebar.number_input('Haemoglobin', min_value=-1.0, max_value=1.0, value=0.05, step=0.001, format="%.3f")
-r_W1 = st.sidebar.number_input('BMI', min_value=-1.0, max_value=1.0, value=0.1, step=0.001, format="%.3f")
-r_A1 = st.sidebar.number_input('Albumin', min_value=-1.0, max_value=1.0, value=0.01, step=0.001, format="%.3f")
-r_I1 = st.sidebar.number_input('Iron', min_value=-1.0, max_value=1.0, value=-0.2, step=0.001, format="%.3f")
+r_C1 = st.sidebar.slider('CRP', min_value=-1.0, max_value=1.0, value=0.04, step=0.01, format="%.2f")
+r_H1 = st.sidebar.slider('Haemoglobin', min_value=-1.0, max_value=1.0, value=-0.12, step=0.01, format="%.2f")
+r_W1 = st.sidebar.slider('BMI', min_value=-1.0, max_value=1.0, value=-0.05, step=0.01, format="%.2f")
+r_A1 = st.sidebar.slider('Albumin', min_value=-1.0, max_value=1.0, value=-0.14, step=0.01, format="%.2f")
+r_I1 = st.sidebar.slider('Iron', min_value=-1.0, max_value=1.0, value=-0.14, step=0.01, format="%.2f")
 
 st.sidebar.markdown("### Difference in Growth/Decay Rate for Severe Group Relative to Intermediate Group to Differentiate Patient Severity")
 st.sidebar.markdown("#### A positive correlation means that as one variable increases or decreases, the other tends to change in the same direction. A negative correlation means that as one variable increases, the other tends to decrease, and vice versa. The larger the absolute value, the stronger the correlation.")
 
-delta1 = st.sidebar.number_input('CRP Growth/Decay Difference', min_value=-1.0, max_value=1.0, value=0.3, step=0.001, format="%.3f")
+delta1 = st.sidebar.slider('CRP Growth/Decay Difference', min_value=-1.0, max_value=1.0, value=0.16, step=0.01, format="%.2f")
 
 st.sidebar.markdown("### How Different Biomarkers Influence Each Other")
-alpha_CW1 = st.sidebar.number_input('CRP and BMI', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
-alpha_HW1 = st.sidebar.number_input('Haemoglobin and BMI', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
-alpha_AW1 = st.sidebar.number_input('Albumin and BMI', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
-alpha_IW1 = st.sidebar.number_input('Iron and BMI', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
-beta_HC1 = st.sidebar.number_input('Haemoglobin and CRP', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
-theta_HI1 = st.sidebar.number_input('Haemoglobin and Iron', min_value=-1.0, max_value=1.0, value=0.001, step=0.001, format="%.3f")
+alpha_CW1 = st.sidebar.slider('CRP and BMI', min_value=-1.0, max_value=1.0, value=0.16, step=0.01, format="%.2f")
+alpha_HW1 = st.sidebar.slider('Haemoglobin and BMI', min_value=-1.0, max_value=1.0, value=-0.12, step=0.01, format="%.2f")
+alpha_AW1 = st.sidebar.slider('Albumin and BMI', min_value=-1.0, max_value=1.0, value=-0.14, step=0.01, format="%.2f")
+alpha_IW1 = st.sidebar.slider('Iron and BMI', min_value=-1.0, max_value=1.0, value=0.07, step=0.01, format="%.2f")
+beta_HC1 = st.sidebar.slider('Haemoglobin and CRP', min_value=-1.0, max_value=1.0, value=0.16, step=0.01, format="%.2f")
+theta_HI1 = st.sidebar.slider('Haemoglobin and Iron', min_value=-1.0, max_value=1.0, value=-0.06, step=0.01, format="%.2f")
 
 
 st.sidebar.markdown("### Variability")
 st.sidebar.markdown("#### If you choose to add variability, you can leave the variability level alone.")
 add_noise = st.sidebar.checkbox('Add Variability', True)
-noise_level = st.sidebar.number_input('Variability Level', min_value=0.0, max_value=2.0, value=1.0, step=0.1, format="%.1f")
+noise_level = st.sidebar.number_input('Variability Level', min_value=0.0, max_value=2.0, value=0.5, step=0.1, format="%.1f")
 
 
 # Run simulation button
