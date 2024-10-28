@@ -366,9 +366,9 @@ add_variability_state = 'T' if add_noise else 'F'
 variability_level_value = noise_level if add_noise else "N/A"
 
 # Collect mean values at birth for intermediate and severe groups
-birth_means = [
-    inter_mu_simu, mean_H_simu_inter, mean_W_simu_inter, mean_A_simu_inter, mean_I_simu_inter,
-    se_mu_simu, mean_H_simu_se, mean_W_simu_se, mean_A_simu_se, mean_I_simu_se
+birth_means_var = [
+    mean_H_simu_inter, mean_W_simu_inter, mean_A_simu_inter, mean_I_simu_inter, mean_C_simu_inter, std_C_inter,
+    mean_H_simu_se, mean_W_simu_se, mean_A_simu_se, mean_I_simu_se, mean_C_simu_se, std_C_se
 ]
 
 # Save parameters section
