@@ -243,7 +243,7 @@ mean_I_simu_inter = st.sidebar.number_input('Intermediate Iron', value=32.5)
 mean_C_simu_inter = st.sidebar.number_input('Intermediate CRP', value=19.0)
 
 st.sidebar.markdown("#### Standard Deviation of CRP")
-std_C_inter = st.sidebar.number_input('Intermediate CRP STD', value=29.0)
+std_C_inter = st.sidebar.number_input('Intermediate CRP', value=29.0)
 
 # Severe Group inputs
 st.sidebar.markdown("## Severe Group")
@@ -255,7 +255,7 @@ mean_I_simu_se = st.sidebar.number_input('Severe Iron', value=16.4)
 mean_C_simu_se = st.sidebar.number_input('Severe CRP', value=74.0)
 
 st.sidebar.markdown("#### Standard Deviation of CRP")
-std_C_se = st.sidebar.number_input('Severe CRP STD', value=55.0)
+std_C_se = st.sidebar.number_input('Severe CRP', value=55.0)
 
 
 
