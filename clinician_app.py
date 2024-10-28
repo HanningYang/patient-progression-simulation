@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import gspread
+import math
+from scipy.stats import lognorm
 from oauth2client.service_account import ServiceAccountCredentials
 
 params1 = []
@@ -136,12 +138,17 @@ def resample_positive(mean, std, size):
         values[negative_indices] = np.random.normal(loc=mean, scale=std, size=negative_indices.sum())
     return values
 
-def generate_initial_conditions(num_patient, mu_simu, mean_H, mean_W, mean_A, mean_I):
+def generate_initial_conditions(num_patient, mean_C, std_C, mean_H, mean_W, mean_A, mean_I):
     # Generate initial conditions based on the means provided
-    sigma = 1.3  # Standard deviation for C cells
-    mu_simu_prime = np.log(mu_simu**2 / np.sqrt(mu_simu**2 + sigma**2))
-    sigma_simu_prime = np.sqrt(np.log(1 + (sigma**2) / mu_simu**2))
-    C_simu = np.exp(np.random.normal(loc=mu_simu_prime, scale=sigma_simu_prime, size=(num_patient,)))
+    # sigma = 1.3  # Standard deviation for C cells
+    # mu_simu_prime = np.log(mu_simu**2 / np.sqrt(mu_simu**2 + sigma**2))
+    # sigma_simu_prime = np.sqrt(np.log(1 + (sigma**2) / mu_simu**2))
+    # C_simu = np.exp(np.random.normal(loc=mu_simu_prime, scale=sigma_simu_prime, size=(num_patient,)))
+
+    sigma_sq = math.log(1 + (std_C / mean_C)**2)
+    mu = math.log(mean_C) - (sigma_sq / 2)
+    sigma = math.sqrt(sigma_sq)
+    C_simu = lognorm.rvs(s=sigma, scale=np.exp(mu), size=num_patient)
     
     H_simu = resample_positive(mean=mean_H, std=2.5, size=(num_patient,))
     W_simu = resample_positive(mean=mean_W, std=2.3, size=(num_patient,))
@@ -221,22 +228,31 @@ st.sidebar.title("Adjust Parameters")
 # - **Initial Conditions**: Mean values for the initial quantities of each cell type.
 # """)
 
+# Add a brief description
+st.sidebar.markdown(""" Please enter the average values for each biomarker measured at birth for the intermediate and severe patient group. For CRP, also include the variability (standard deviation) to assess its range. """)
 
 # Initial conditions
-st.sidebar.markdown("### Values at Birth (Intermediate Group)")
-inter_mu_simu = st.sidebar.number_input('Mean of CRP (Intermediate Group)', value=2.2)
-mean_H_simu_inter = st.sidebar.number_input('Mean of haemoglobin (Intermediate Group)', value=10.6)
-mean_W_simu_inter = st.sidebar.number_input('Mean of BMI (Intermediate Group)', value=14.0)
-mean_A_simu_inter = st.sidebar.number_input('Mean of albumin (Intermediate Group)', value=3.8)
-mean_I_simu_inter = st.sidebar.number_input('Mean of iron (Intermediate Group)', value=32.5)
+st.sidebar.markdown("### Intermediate Group")
+st.sidebar.markdown("### Mean of Biomarker")
+mean_H_simu_inter = st.sidebar.number_input('haemoglobin', value=10.6)
+mean_W_simu_inter = st.sidebar.number_input('BMI', value=14.0)
+mean_A_simu_inter = st.sidebar.number_input('albumin', value=3.8)
+mean_I_simu_inter = st.sidebar.number_input('iron', value=32.5)
+mean_C_simu_inter = st.sidebar.number_input('CRP', value=19.0)
 
-st.sidebar.markdown("### Values at Birth (Severe Group)")
-se_mu_simu = st.sidebar.number_input('Mean of CRP (Severe Group)', value=3.9)
-mean_H_simu_se = st.sidebar.number_input('Mean of haemoglobin (Severe Group)', value=8.4)
-mean_W_simu_se = st.sidebar.number_input('Mean of BMI (Severe Group)', value=14.0)
-mean_A_simu_se = st.sidebar.number_input('Mean of albumin (Severe Group)', value=2.8)
-mean_I_simu_se = st.sidebar.number_input('Mean of iron (Severe Group)', value=16.4)
+st.sidebar.markdown("### Variability of CRP")
+std_C_inter = st.sidebar.number_input('CRP', value=29.0)
 
+st.sidebar.markdown("### Severe Group")
+st.sidebar.markdown("### Mean of Biomarker")
+mean_H_simu_se = st.sidebar.number_input('haemoglobin', value=8.4)
+mean_W_simu_se = st.sidebar.number_input('BMI', value=14.0)
+mean_A_simu_se = st.sidebar.number_input('albumin', value=2.8)
+mean_I_simu_se = st.sidebar.number_input('iron', value=16.4)
+mean_C_simu_se = st.sidebar.number_input('CRP', value=74.0)
+
+st.sidebar.markdown("### Variability of CRP")
+std_C_se = st.sidebar.number_input('CRP', value=55.0)
 
 
 # Parameters to adjust
@@ -289,7 +305,8 @@ if st.sidebar.button('Run Simulation'):
     num_patient = 3
     simu_init_inter = generate_initial_conditions(
         num_patient,
-        inter_mu_simu,
+        mean_C_simu_inter,
+        std_C_inter,
         mean_H_simu_inter,
         mean_W_simu_inter,
         mean_A_simu_inter,
@@ -297,7 +314,8 @@ if st.sidebar.button('Run Simulation'):
     )
     simu_init_se = generate_initial_conditions(
         num_patient,
-        se_mu_simu,
+        mean_C_simu_se,
+        std_C_se,
         mean_H_simu_se,
         mean_W_simu_se,
         mean_A_simu_se,
