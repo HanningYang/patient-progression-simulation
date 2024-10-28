@@ -229,7 +229,7 @@ st.sidebar.title("Adjust Parameters")
 # """)
 
 # Add a brief description
-st.sidebar.markdown(""" Please enter the average values for each biomarker measured at birth for the intermediate and severe patient group. For CRP, also include the variability (standard deviation) to assess its range. """)
+st.sidebar.markdown(""" Please enter means of each biomarker measured at birth for the intermediate and severe patient group. For CRP, also include standard deviation (std). """)
 
 
 # Initial conditions
@@ -242,8 +242,8 @@ mean_A_simu_inter = st.sidebar.number_input('Intermediate Albumin', value=3.8)
 mean_I_simu_inter = st.sidebar.number_input('Intermediate Iron', value=32.5)
 mean_C_simu_inter = st.sidebar.number_input('Intermediate CRP', value=19.0)
 
-st.sidebar.markdown("#### Variability of CRP")
-std_C_inter = st.sidebar.number_input('Intermediate CRP Variability', value=29.0)
+st.sidebar.markdown("#### Standard Deviation of CRP")
+std_C_inter = st.sidebar.number_input('Intermediate CRP STD', value=29.0)
 
 # Severe Group inputs
 st.sidebar.markdown("## Severe Group")
@@ -254,8 +254,8 @@ mean_A_simu_se = st.sidebar.number_input('Severe Albumin', value=2.8)
 mean_I_simu_se = st.sidebar.number_input('Severe Iron', value=16.4)
 mean_C_simu_se = st.sidebar.number_input('Severe CRP', value=74.0)
 
-st.sidebar.markdown("#### Variability of CRP")
-std_C_se = st.sidebar.number_input('Severe CRP Variability', value=55.0)
+st.sidebar.markdown("#### Standard Deviation of CRP")
+std_C_se = st.sidebar.number_input('Severe CRP STD', value=55.0)
 
 
 
