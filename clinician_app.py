@@ -229,7 +229,7 @@ st.sidebar.title("Adjust Parameters")
 # """)
 
 # Add a brief description
-st.sidebar.markdown(""" Please enter means of each biomarker measured at birth for the intermediate and severe patient group. For CRP, also include standard deviation (std). """)
+st.sidebar.markdown(""" Please enter mean of each biomarker measured at birth for the intermediate and severe patient group. For CRP, also include standard deviation (std). """)
 
 
 # Initial conditions
