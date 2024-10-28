@@ -207,9 +207,9 @@ st.markdown("""
 Welcome to **RDEB Patient Progression Simulation App**. This app allows you to adjust simulation parameters and visualize the impact on RDEB patient outcomes.
 
 **Instructions:**
-- Adjust the parameters in the sidebar.
-- Each parameter includes a brief description.
+- Adjust the parameters in the sidebar, where each parameter includes a brief description. The default values serve as initial estimates.
 - Click **"Run Simulation"** to update the results.
+- Click **"Save Parameters"** to store the parameter settings you find reasonable.
 """)
 
 # Sidebar parameters
