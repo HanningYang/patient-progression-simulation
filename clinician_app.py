@@ -11,7 +11,7 @@ params1 = []
 if 'parameters_saved' not in st.session_state:
     st.session_state['parameters_saved'] = False
 
-def save_parameters(name, comment, parameters, add_variability, variability_level, birth_means):
+def save_parameters(name, comment, parameters, add_variability, variability_level, birth_means_var):
     try:
         # Use credentials from Streamlit secrets
         credentials = ServiceAccountCredentials.from_json_keyfile_dict(
@@ -24,7 +24,7 @@ def save_parameters(name, comment, parameters, add_variability, variability_leve
         sheet = client.open("ODE-parameters").sheet1
         
         # Prepare the data to append
-        data = [name, comment] + parameters + [add_variability, variability_level] + birth_means
+        data = [name, comment] + parameters + [add_variability, variability_level] + birth_means_var
         
         # Append the data as a new row
         sheet.append_row(data)
@@ -389,7 +389,7 @@ if st.sidebar.button('Save Parameters'):
             [float(p) for p in st.session_state['params1']],
             add_variability_state, 
             variability_level_value,
-            birth_means
+            birth_means_var
         )
         st.session_state['parameters_saved'] = True  # Set flag to True after saving
 
