@@ -235,26 +235,26 @@ st.sidebar.markdown(""" Please enter the average values for each biomarker measu
 # Initial conditions
 # Intermediate Group inputs
 st.sidebar.markdown("### Intermediate Group")
-st.sidebar.markdown("### Mean of Biomarker")
+st.sidebar.markdown("#### Mean of Biomarker")
 mean_H_simu_inter = st.sidebar.number_input('Intermediate Haemoglobin', value=10.6)
 mean_W_simu_inter = st.sidebar.number_input('Intermediate BMI', value=14.0)
 mean_A_simu_inter = st.sidebar.number_input('Intermediate Albumin', value=3.8)
 mean_I_simu_inter = st.sidebar.number_input('Intermediate Iron', value=32.5)
 mean_C_simu_inter = st.sidebar.number_input('Intermediate CRP', value=19.0)
 
-st.sidebar.markdown("### Variability of CRP")
+st.sidebar.markdown("#### Variability of CRP")
 std_C_inter = st.sidebar.number_input('Intermediate CRP Variability', value=29.0)
 
 # Severe Group inputs
 st.sidebar.markdown("### Severe Group")
-st.sidebar.markdown("### Mean of Biomarker")
+st.sidebar.markdown("#### Mean of Biomarker")
 mean_H_simu_se = st.sidebar.number_input('Severe Haemoglobin', value=8.4)
 mean_W_simu_se = st.sidebar.number_input('Severe BMI', value=14.0)
 mean_A_simu_se = st.sidebar.number_input('Severe Albumin', value=2.8)
 mean_I_simu_se = st.sidebar.number_input('Severe Iron', value=16.4)
 mean_C_simu_se = st.sidebar.number_input('Severe CRP', value=74.0)
 
-st.sidebar.markdown("### Variability of CRP")
+st.sidebar.markdown("#### Variability of CRP")
 std_C_se = st.sidebar.number_input('Severe CRP Variability', value=55.0)
 
 
