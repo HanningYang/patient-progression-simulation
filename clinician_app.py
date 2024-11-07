@@ -206,24 +206,41 @@ def plot_initial_conditions_distributions(mean_C, std_C, mean_H, mean_W, mean_A,
     A_samples = np.random.normal(mean_A, 0.9, num_samples)
     I_samples = np.random.normal(mean_I, 21, num_samples)
 
-    # Plot distributions with larger figure size
-    fig, axes = plt.subplots(1, 5, figsize=(30, 6), sharey=False)
-    biomarkers = ['CRP', 'Haemoglobin', 'BMI', 'Albumin', 'Iron']
-    samples = [C_samples, H_samples, W_samples, A_samples, I_samples]
-    
-    for i, (sample, biomarker) in enumerate(zip(samples, biomarkers)):
-        sns.histplot(sample, kde=True, ax=axes[i], color="coral", edgecolor="black", alpha=0.7)
-        axes[i].set_title(f"{biomarker} Distribution ({group_name})")
-        axes[i].set_xlabel(biomarker)
-        axes[i].set_ylabel("Frequency")
-        
-        # Adjust x-axis limits for CRP if needed
-        if biomarker == "CRP" and group_name == "Intermediate":
-            axes[i].set_xlim(0, 200)  # Adjust this range as needed for clarity
-        elif biomarker == "CRP" and group_name == "Severe":
-            axes[i].set_xlim(0, 500)  # Adjust for severe group as needed
-    
-    plt.tight_layout()
+    # Create subplots with two rows: first row for CRP and Hemoglobin, second row for BMI, Albumin, and Iron
+    fig, axes = plt.subplots(2, 3, figsize=(20, 12))
+    fig.suptitle(f"Initial Conditions Distributions ({group_name})", fontsize=16)
+
+    # Plot each biomarker with appropriate spacing and axis limits
+    sns.histplot(C_samples, kde=True, ax=axes[0, 0], color="coral", edgecolor="black", alpha=0.7)
+    axes[0, 0].set_title("CRP Distribution")
+    axes[0, 0].set_xlabel("CRP")
+    axes[0, 0].set_ylabel("Frequency")
+    axes[0, 0].set_xlim(0, 200 if group_name == "Intermediate" else 800)  # Adjusted x-axis limits for clarity
+
+    sns.histplot(H_samples, kde=True, ax=axes[0, 1], color="lightblue", edgecolor="black", alpha=0.7)
+    axes[0, 1].set_title("Haemoglobin Distribution")
+    axes[0, 1].set_xlabel("Haemoglobin")
+    axes[0, 1].set_ylabel("Frequency")
+
+    sns.histplot(W_samples, kde=True, ax=axes[1, 0], color="seagreen", edgecolor="black", alpha=0.7)
+    axes[1, 0].set_title("BMI Distribution")
+    axes[1, 0].set_xlabel("BMI")
+    axes[1, 0].set_ylabel("Frequency")
+
+    sns.histplot(A_samples, kde=True, ax=axes[1, 1], color="gold", edgecolor="black", alpha=0.7)
+    axes[1, 1].set_title("Albumin Distribution")
+    axes[1, 1].set_xlabel("Albumin")
+    axes[1, 1].set_ylabel("Frequency")
+
+    sns.histplot(I_samples, kde=True, ax=axes[1, 2], color="plum", edgecolor="black", alpha=0.7)
+    axes[1, 2].set_title("Iron Distribution")
+    axes[1, 2].set_xlabel("Iron")
+    axes[1, 2].set_ylabel("Frequency")
+
+    # Hide any unused subplot axes for a cleaner look
+    axes[0, 2].axis('off')
+
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])  # Adjust layout to fit titles
     st.pyplot(fig)
 
 
