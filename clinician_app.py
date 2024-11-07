@@ -174,12 +174,14 @@ def plot_simulation(final_data):
             ax.plot(time, patient_data[:, i], label=biomarkers[i], color=colors[i])
             # ax.set_ylim(y_limits[i])
             ax.set_ylabel(biomarkers[i])
+            ax.set_xlabel('Time')
             ax.legend()
         
         # Combined plot for all biomarkers in the last subplot
         for i, biomarker in enumerate(biomarkers):
             axes[5].plot(time, patient_data[:, i], label=biomarker, color=colors[i])
         axes[5].set_ylabel('Values')
+        axes[5].set_xlabel('Time')
         axes[5].set_title('Combined Biomarkers')
         axes[5].legend()
         
@@ -336,7 +338,7 @@ if st.sidebar.checkbox("Visualize Initial Conditions Distributions"):
 # Parameters to adjust
 st.sidebar.markdown("## Growth/Deacay Rate of Different Biomarkers")
 st.sidebar.markdown("A positive value for the growth/decay rate indicates that the biomarker tends to increase (growth) over time, while a negative value indicates a decrease (decay) over time.")
-r_C1 = st.sidebar.slider('CRP', min_value=-1.0, max_value=1.0, value=0.2, step=0.01, format="%.2f")
+r_C1 = st.sidebar.slider('CRP', min_value=-1.0, max_value=1.0, value=0.1, step=0.01, format="%.2f")
 r_H1 = st.sidebar.slider('Haemoglobin', min_value=-1.0, max_value=1.0, value=-0.1, step=0.01, format="%.2f")
 r_W1 = st.sidebar.slider('BMI', min_value=-1.0, max_value=1.0, value=-0.05, step=0.01, format="%.2f")
 r_A1 = st.sidebar.slider('Albumin', min_value=-1.0, max_value=1.0, value=-0.1, step=0.01, format="%.2f")
@@ -345,7 +347,7 @@ r_I1 = st.sidebar.slider('Iron', min_value=-1.0, max_value=1.0, value=-0.1, step
 st.sidebar.markdown("## Difference in Growth/Decay Rate for Severe Group Relative to Intermediate Group to Differentiate Patient Severity")
 st.sidebar.markdown("A positive correlation means that as one variable increases or decreases, the other tends to change in the same direction. A negative correlation means that as one variable increases, the other tends to decrease, and vice versa. The larger the absolute value, the stronger the correlation.")
 
-delta1 = st.sidebar.slider('CRP Growth/Decay Difference', min_value=-1.0, max_value=1.0, value=0.16, step=0.01, format="%.2f")
+delta1 = st.sidebar.slider('CRP Growth/Decay Difference', min_value=-1.0, max_value=1.0, value=0.1, step=0.01, format="%.2f")
 
 st.sidebar.markdown("## How the First Biomarker Influences the Second One")
 alpha_HI1 = st.sidebar.slider('Iron - Hemoglobin', min_value=-1.0, max_value=1.0, value=0.05, step=0.01, format="%.2f")
