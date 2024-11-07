@@ -196,6 +196,30 @@ def plot_simulation(final_data):
         st.pyplot(fig)
 
 
+def plot_initial_conditions_distributions(mean_C, std_C, mean_H, mean_W, mean_A, mean_I, group_name):
+    num_samples = 1000  # Number of samples to plot the distributions
+
+    # Generate samples for each biomarker
+    C_samples = lognorm.rvs(s=std_C / mean_C, scale=mean_C, size=num_samples)
+    H_samples = np.random.normal(mean_H, 2.5, num_samples)
+    W_samples = np.random.normal(mean_W, 2.3, num_samples)
+    A_samples = np.random.normal(mean_A, 0.9, num_samples)
+    I_samples = np.random.normal(mean_I, 21, num_samples)
+
+    # Plot distributions
+    fig, axes = plt.subplots(1, 5, figsize=(20, 4), sharey=True)
+    biomarkers = ['CRP', 'Haemoglobin', 'BMI', 'Albumin', 'Iron']
+    samples = [C_samples, H_samples, W_samples, A_samples, I_samples]
+    
+    for i, (sample, biomarker) in enumerate(zip(samples, biomarkers)):
+        sns.histplot(sample, kde=True, ax=axes[i])
+        axes[i].set_title(f"{biomarker} Distribution ({group_name})")
+        axes[i].set_xlabel(biomarker)
+        axes[i].set_ylabel("Frequency")
+
+    st.pyplot(fig)
+
+
 # Set plot style
 # plt.style.use('seaborn-darkgrid')
 plt.style.use('ggplot')
@@ -256,6 +280,33 @@ mean_C_simu_se = st.sidebar.number_input('Severe CRP', value=74.0)
 
 st.sidebar.markdown("#### Standard Deviation of CRP")
 std_C_se = st.sidebar.number_input('Severe CRP', value=55.0)
+
+# Sidebar option to visualize distributions
+if st.sidebar.checkbox("Visualize Initial Conditions Distributions"):
+    st.markdown("## Initial Conditions Distributions")
+    st.markdown("This section allows you to view the distribution of initial conditions based on the specified means and standard deviations for the intermediate and severe groups.")
+
+    # Visualize intermediate group distribution
+    plot_initial_conditions_distributions(
+        mean_C=mean_C_simu_inter,
+        std_C=std_C_inter,
+        mean_H=mean_H_simu_inter,
+        mean_W=mean_W_simu_inter,
+        mean_A=mean_A_simu_inter,
+        mean_I=mean_I_simu_inter,
+        group_name="Intermediate"
+    )
+
+    # Visualize severe group distribution
+    plot_initial_conditions_distributions(
+        mean_C=mean_C_simu_se,
+        std_C=std_C_se,
+        mean_H=mean_H_simu_se,
+        mean_W=mean_W_simu_se,
+        mean_A=mean_A_simu_se,
+        mean_I=mean_I_simu_se,
+        group_name="Severe"
+    )
 
 
 
