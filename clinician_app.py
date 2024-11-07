@@ -347,7 +347,7 @@ st.sidebar.markdown("A positive correlation means that as one variable increases
 
 delta1 = st.sidebar.slider('CRP Growth/Decay Difference', min_value=-1.0, max_value=1.0, value=0.16, step=0.01, format="%.2f")
 
-st.sidebar.markdown("## How the First Biomarker Influence the Second One")
+st.sidebar.markdown("## How the First Biomarker Influences the Second One")
 alpha_HI1 = st.sidebar.slider('Iron - Hemoglobin', min_value=-1.0, max_value=1.0, value=0.05, step=0.01, format="%.2f")
 alpha_AW1 = st.sidebar.slider('BMI - Albumin', min_value=-1.0, max_value=1.0, value=0.05, step=0.01, format="%.2f")
 
