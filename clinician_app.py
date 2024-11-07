@@ -211,18 +211,18 @@ def plot_initial_conditions_distributions(mean_C, std_C, mean_H, mean_W, mean_A,
     fig.suptitle(f"Initial Conditions Distributions ({group_name})", fontsize=16)
 
     # Plot each biomarker with appropriate spacing and axis limits
-    sns.histplot(C_samples, kde=True, ax=axes[0, 0], color="coral", edgecolor="black", alpha=0.7)
+    sns.histplot(C_samples, kde=True, ax=axes[0, 0], color="royalblue", edgecolor="black", alpha=0.7)
     axes[0, 0].set_title("CRP Distribution")
     axes[0, 0].set_xlabel("CRP")
     axes[0, 0].set_ylabel("Frequency")
     axes[0, 0].set_xlim(0, 200 if group_name == "Intermediate" else 800)  # Adjusted x-axis limits for clarity
 
-    sns.histplot(H_samples, kde=True, ax=axes[0, 1], color="lightblue", edgecolor="black", alpha=0.7)
+    sns.histplot(H_samples, kde=True, ax=axes[0, 1], color="mediumseagreen", edgecolor="black", alpha=0.7)
     axes[0, 1].set_title("Haemoglobin Distribution")
     axes[0, 1].set_xlabel("Haemoglobin")
     axes[0, 1].set_ylabel("Frequency")
 
-    sns.histplot(W_samples, kde=True, ax=axes[1, 0], color="seagreen", edgecolor="black", alpha=0.7)
+    sns.histplot(W_samples, kde=True, ax=axes[1, 0], color="salmon", edgecolor="black", alpha=0.7)
     axes[1, 0].set_title("BMI Distribution")
     axes[1, 0].set_xlabel("BMI")
     axes[1, 0].set_ylabel("Frequency")
