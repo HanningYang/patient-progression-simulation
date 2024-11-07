@@ -207,7 +207,7 @@ def plot_initial_conditions_distributions(mean_C, std_C, mean_H, mean_W, mean_A,
     I_samples = np.random.normal(mean_I, 21, num_samples)
 
     # Plot distributions
-    fig, axes = plt.subplots(1, 5, figsize=(20, 4), sharey=True)
+    fig, axes = plt.subplots(1, 5, figsize=(25, 5), sharey=True)
     biomarkers = ['CRP', 'Haemoglobin', 'BMI', 'Albumin', 'Iron']
     samples = [C_samples, H_samples, W_samples, A_samples, I_samples]
     
