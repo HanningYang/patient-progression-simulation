@@ -166,7 +166,7 @@ def plot_simulation(final_data):
     # Plot each patient’s data in separate figures
     num_patients = len(final_data)
     for idx, patient_data in enumerate(final_data):
-        fig, axes = plt.subplots(nrows=6, ncols=1, figsize=(10, 30), sharex=True)
+        fig, axes = plt.subplots(nrows=6, ncols=1, figsize=(10, 30))
         time = patient_data[:, -1]
         
         # Plot each biomarker separately
@@ -174,14 +174,14 @@ def plot_simulation(final_data):
             ax.plot(time, patient_data[:, i], label=biomarkers[i], color=colors[i])
             # ax.set_ylim(y_limits[i])
             ax.set_ylabel(biomarkers[i])
-            ax.set_xlabel('Time')
+            ax.set_xlabel('Age')
             ax.legend()
         
         # Combined plot for all biomarkers in the last subplot
         for i, biomarker in enumerate(biomarkers):
             axes[5].plot(time, patient_data[:, i], label=biomarker, color=colors[i])
         axes[5].set_ylabel('Values')
-        axes[5].set_xlabel('Time')
+        axes[5].set_xlabel('Age')
         axes[5].set_title('Combined Biomarkers')
         axes[5].legend()
         
