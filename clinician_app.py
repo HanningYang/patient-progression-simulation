@@ -206,18 +206,26 @@ def plot_initial_conditions_distributions(mean_C, std_C, mean_H, mean_W, mean_A,
     A_samples = np.random.normal(mean_A, 0.9, num_samples)
     I_samples = np.random.normal(mean_I, 21, num_samples)
 
-    # Plot distributions
-    fig, axes = plt.subplots(1, 5, figsize=(25, 5), sharey=True)
+    # Plot distributions with larger figure size
+    fig, axes = plt.subplots(1, 5, figsize=(30, 6), sharey=False)
     biomarkers = ['CRP', 'Haemoglobin', 'BMI', 'Albumin', 'Iron']
     samples = [C_samples, H_samples, W_samples, A_samples, I_samples]
     
     for i, (sample, biomarker) in enumerate(zip(samples, biomarkers)):
-        sns.histplot(sample, kde=True, ax=axes[i])
+        sns.histplot(sample, kde=True, ax=axes[i], color="coral", edgecolor="black", alpha=0.7)
         axes[i].set_title(f"{biomarker} Distribution ({group_name})")
         axes[i].set_xlabel(biomarker)
         axes[i].set_ylabel("Frequency")
-
+        
+        # Adjust x-axis limits for CRP if needed
+        if biomarker == "CRP" and group_name == "Intermediate":
+            axes[i].set_xlim(0, 200)  # Adjust this range as needed for clarity
+        elif biomarker == "CRP" and group_name == "Severe":
+            axes[i].set_xlim(0, 500)  # Adjust for severe group as needed
+    
+    plt.tight_layout()
     st.pyplot(fig)
+
 
 
 # Set plot style
