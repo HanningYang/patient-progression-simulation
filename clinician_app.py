@@ -38,23 +38,23 @@ def save_parameters(name, comment, parameters, add_variability, variability_leve
 ### Function Definitions
 
 def ode_system1(y, t, K_C, K_H, K_W, K_A, K_I, r_C, r_H, r_W, r_A, r_I,
-                alpha_CW, alpha_HW, alpha_AW, alpha_IW, beta_HC, theta_HI):
+                alpha_HI, alpha_AW):
     C, H, W, A, I = y
-    dCdt = r_C * C * (1 - C / K_C) + alpha_CW * (W / K_W)
-    dHdt = r_H * H * (1 - H / K_H) + alpha_HW * (W / K_W) + beta_HC * (C / K_C) + theta_HI * (I / K_I)
+    dCdt = r_C * C * (1 - C / K_C)
+    dHdt = r_H * H * (1 - H / K_H) + alpha_HI * (I / K_I)
     dWdt = r_W * W * (1 - W / K_W)
     dAdt = r_A * A * (1 - A / K_A) + alpha_AW * (W / K_W)
-    dIdt = r_I * I * (1 - I / K_I) + alpha_IW * (W / K_W)
+    dIdt = r_I * I * (1 - I / K_I) 
     return np.array([dCdt, dHdt, dWdt, dAdt, dIdt])
 
 def ode_system2(y, t, K_C, K_H, K_W, K_A, K_I, r_C, r_H, r_W, r_A, r_I,
-                alpha_CW, alpha_HW, alpha_AW, alpha_IW, beta_HC, theta_HI, delta):
+                alpha_HI, alpha_AW, delta):
     C, H, W, A, I = y
-    dCdt = (r_C + delta) * C * (1 - C / K_C) + alpha_CW * (W / K_W)
-    dHdt = r_H * H * (1 - H / K_H) + alpha_HW * (W / K_W) + beta_HC * (C / K_C) + theta_HI * (I / K_I)
+    dCdt = (r_C + delta) * C * (1 - C / K_C) 
+    dHdt = r_H * H * (1 - H / K_H) + alpha_HI * (I / K_I)
     dWdt = r_W * W * (1 - W / K_W)
     dAdt = r_A * A * (1 - A / K_A) + alpha_AW * (W / K_W)
-    dIdt = r_I * I * (1 - I / K_I) + alpha_IW * (W / K_W)
+    dIdt = r_I * I * (1 - I / K_I) 
     return np.array([dCdt, dHdt, dWdt, dAdt, dIdt])
 
 def euler_method(func, y0, t, *args):
@@ -101,15 +101,14 @@ def concatenate_data_diff_noise(init_inter, init_se, time_points, maxes, cali_pa
 
     final_data = []
     K_C, K_H, K_W, K_A, K_I = maxes
-    r_C, r_H, r_W, r_A, r_I, alpha_CW, alpha_HW, alpha_AW, alpha_IW, beta_HC, theta_HI, delta = cali_params
+    r_C, r_H, r_W, r_A, r_I, alpha_HI, alpha_AW, delta = cali_params
 
     for idx, t in enumerate(inter_time_points):
         t = np.array(t)
         y0 = init_inter[:, idx]
         inter = euler_method(ode_system1, y0, t, K_C, K_H, K_W, K_A, K_I,
                              r_C, r_H, r_W, r_A, r_I,
-                             alpha_CW, alpha_HW, alpha_AW, alpha_IW,
-                             beta_HC, theta_HI)
+                             alpha_HI, alpha_AW)
         size = inter.shape[0]
         inter = process_data(inter, size, noise, noise_std)
         t = t.reshape(-1, 1)
@@ -121,8 +120,7 @@ def concatenate_data_diff_noise(init_inter, init_se, time_points, maxes, cali_pa
         y0 = init_se[:, idx]
         se = euler_method(ode_system2, y0, t, K_C, K_H, K_W, K_A, K_I,
                           r_C, r_H, r_W, r_A, r_I,
-                          alpha_CW, alpha_HW, alpha_AW, alpha_IW,
-                          beta_HC, theta_HI, delta)
+                          alpha_HI, alpha_AW, delta)
         size = se.shape[0]
         se = process_data(se, size, noise, noise_std)
         t = t.reshape(-1, 1)
@@ -338,24 +336,20 @@ if st.sidebar.checkbox("Visualize Initial Conditions Distributions"):
 # Parameters to adjust
 st.sidebar.markdown("## Growth/Deacay Rate of Different Biomarkers")
 st.sidebar.markdown("A positive value for the growth/decay rate indicates that the biomarker tends to increase (growth) over time, while a negative value indicates a decrease (decay) over time.")
-r_C1 = st.sidebar.slider('CRP', min_value=-1.0, max_value=1.0, value=0.04, step=0.01, format="%.2f")
-r_H1 = st.sidebar.slider('Haemoglobin', min_value=-1.0, max_value=1.0, value=-0.12, step=0.01, format="%.2f")
+r_C1 = st.sidebar.slider('CRP', min_value=-1.0, max_value=1.0, value=0.2, step=0.01, format="%.2f")
+r_H1 = st.sidebar.slider('Haemoglobin', min_value=-1.0, max_value=1.0, value=-0.1, step=0.01, format="%.2f")
 r_W1 = st.sidebar.slider('BMI', min_value=-1.0, max_value=1.0, value=-0.05, step=0.01, format="%.2f")
-r_A1 = st.sidebar.slider('Albumin', min_value=-1.0, max_value=1.0, value=-0.05, step=0.01, format="%.2f")
-r_I1 = st.sidebar.slider('Iron', min_value=-1.0, max_value=1.0, value=-0.14, step=0.01, format="%.2f")
+r_A1 = st.sidebar.slider('Albumin', min_value=-1.0, max_value=1.0, value=-0.1, step=0.01, format="%.2f")
+r_I1 = st.sidebar.slider('Iron', min_value=-1.0, max_value=1.0, value=-0.1, step=0.01, format="%.2f")
 
 st.sidebar.markdown("## Difference in Growth/Decay Rate for Severe Group Relative to Intermediate Group to Differentiate Patient Severity")
 st.sidebar.markdown("A positive correlation means that as one variable increases or decreases, the other tends to change in the same direction. A negative correlation means that as one variable increases, the other tends to decrease, and vice versa. The larger the absolute value, the stronger the correlation.")
 
 delta1 = st.sidebar.slider('CRP Growth/Decay Difference', min_value=-1.0, max_value=1.0, value=0.16, step=0.01, format="%.2f")
 
-st.sidebar.markdown("## How Different Biomarkers Influence Each Other")
-alpha_CW1 = st.sidebar.slider('CRP and BMI', min_value=-1.0, max_value=1.0, value=0.16, step=0.01, format="%.2f")
-alpha_HW1 = st.sidebar.slider('Haemoglobin and BMI', min_value=-1.0, max_value=1.0, value=-0.12, step=0.01, format="%.2f")
-alpha_AW1 = st.sidebar.slider('Albumin and BMI', min_value=-1.0, max_value=1.0, value=-0.14, step=0.01, format="%.2f")
-alpha_IW1 = st.sidebar.slider('Iron and BMI', min_value=-1.0, max_value=1.0, value=0.07, step=0.01, format="%.2f")
-beta_HC1 = st.sidebar.slider('Haemoglobin and CRP', min_value=-1.0, max_value=1.0, value=0.16, step=0.01, format="%.2f")
-theta_HI1 = st.sidebar.slider('Haemoglobin and Iron', min_value=-1.0, max_value=1.0, value=-0.06, step=0.01, format="%.2f")
+st.sidebar.markdown("## How the First Biomarker Influence the Second One")
+alpha_HI1 = st.sidebar.slider('Iron - Hemoglobin', min_value=-1.0, max_value=1.0, value=0.05, step=0.01, format="%.2f")
+alpha_AW1 = st.sidebar.slider('BMI - Albumin', min_value=-1.0, max_value=1.0, value=0.05, step=0.01, format="%.2f")
 
 
 st.sidebar.markdown("## Variability")
@@ -368,8 +362,7 @@ noise_level = st.sidebar.number_input('Variability Level', min_value=0.0, max_va
 if st.sidebar.button('Run Simulation'):
     # Convert parameters to the appropriate format
     params1 = [r_C1, r_H1, r_W1, r_A1, r_I1,
-               alpha_CW1, alpha_HW1, alpha_AW1, alpha_IW1,
-               beta_HC1, theta_HI1, delta1]
+               alpha_HI1, alpha_AW1, delta1]
     st.session_state['params1'] = params1
 
     
