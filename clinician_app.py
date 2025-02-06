@@ -262,11 +262,6 @@ Welcome to **RDEB Patient Progression Simulation App**. This app allows you to a
 """)
 
 
-import streamlit as st
-import numpy as np
-
-st.title("ODE System Representation")
-
 # Displaying the ODE System with LaTeX
 st.latex(r"""
 \begin{aligned}
