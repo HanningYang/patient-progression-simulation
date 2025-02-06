@@ -273,40 +273,53 @@ st.latex(r"""
 \end{aligned}
 """)
 
-# Explanation for users with a math/science background
+# Explanation with mathematical notation
 with st.expander("📊 **Mathematical Explanation**"):
+    st.latex(r"""
+    \textbf{Growth Terms:} \quad \frac{dX}{dt} = r_X X \left(1 - \frac{X}{K_X} \right)
+    """)
     st.write("""
-    - Each equation describes the growth of a variable over time using **logistic growth**.
-    - The general form for growth is:  
+    - Each variable \( X \) (e.g., \( C, H, W, A, I \)) follows a **logistic growth model**.
+    - The term \( r_X X \) represents **natural growth**.
+    - The factor \( \left(1 - \frac{X}{K_X} \right) \) ensures that growth slows as \( X \) approaches its limit \( K_X \) (carrying capacity).
+    """)
+
+    st.latex(r"""
+    \textbf{Interaction Terms:} \quad \alpha_{HI} \frac{I}{K_I}, \quad \alpha_{AW} \frac{W}{K_W}
+    """)
+    st.write("""
+    - Some variables depend on others:
+      - Hemoglobin (\( H \)) receives an **additional boost** from iron (\( I \)), scaled by \( \alpha_{HI} \).
+      - Albumin (\( A \)) increases with weight (\( W \)), controlled by \( \alpha_{AW} \).
+    """)
+
+    st.latex(r"""
+    \textbf{Extra Growth Modification:} \quad (r_C + \delta) C \left(1 - \frac{C}{K_C} \right)
+    """)
+    st.write("""
+    - Unlike the other variables, \( C \) has an **additional term** \( \delta \) that modifies its growth rate.
+    """)
+
+# Simple Explanation with Math Format
+with st.expander("🧑‍🤝‍🧑 **Simple Explanation Using Math**"):
+    st.write("""
+    - Each equation describes **how a variable changes over time**.
+    - The formula \( \frac{dX}{dt} \) means **"the change in X over time."**
+    - Growth follows this rule:  
       \[
-      \frac{dX}{dt} = r_X X \left(1 - \frac{X}{K_X} \right)
+      \frac{dX}{dt} = \text{Growth} + \text{Influence from Others}
       \]
-      where:
-      - \(X\) is a variable (e.g., \(C\), \(H\), etc.).
-      - \(r_X\) is the growth rate.
-      - \(K_X\) is the carrying capacity (maximum limit).
-    - **Interactions:**  
-      - \(H\) (hemoglobin) is influenced by \(I\) (iron) via \(\alpha_{HI}\).
-      - \(A\) (albumin) is influenced by \(W\) (weight) via \(\alpha_{AW}\).
-    - The **extra term \(\delta\)** in \(dC/dt\) modifies the standard logistic growth.
-
-    This system models how different biomarkers interact and evolve over time.
+    - Growth is limited:  
+      \[
+      \text{Growth Rate} \times \left( 1 - \frac{\text{Current Value}}{\text{Maximum Value}} \right)
+      \]
+    - Some variables are **linked**:
+      - \( H \) grows when \( I \) is large.
+      - \( A \) grows when \( W \) is large.
+    - The term \( \delta \) **changes** how \( C \) grows.
     """)
 
-# Explanation for users without a math background
-with st.expander("🧑‍🤝‍🧑 **Simple Explanation**"):
-    st.write("""
-    - Imagine each variable as a population (e.g., trees in a forest).
-    - They **grow** at their own rate but have a **limit** (you can't have infinite trees).
-    - Some variables **help** others grow:
-      - Hemoglobin (\(H\)) gets a boost from iron (\(I\)).
-      - Albumin (\(A\)) gets a boost from weight (\(W\)).
-    - The extra \(\delta\) in \(C\) makes it grow differently than the others.
-    - Over time, these factors create a balance in the system.
-    """)
-
-st.write("This system helps us understand how different biomarkers change over time and influence each other.")
-
+st.write("This system helps describe how different biomakers change and influence each other over time.")
 
 # Sidebar parameters
 st.sidebar.title("Adjust Parameters")
