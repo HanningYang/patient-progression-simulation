@@ -261,6 +261,58 @@ Welcome to **RDEB Patient Progression Simulation App**. This app allows you to a
 - Click **"Save Parameters"** to store the parameter settings you find reasonable.
 """)
 
+
+import streamlit as st
+import numpy as np
+
+st.title("ODE System Representation")
+
+# Displaying the ODE System with LaTeX
+st.latex(r"""
+\begin{aligned}
+\frac{dC}{dt} &= (r_C + \delta) C \left(1 - \frac{C}{K_C} \right) \\
+\frac{dH}{dt} &= r_H H \left(1 - \frac{H}{K_H} \right) + \alpha_{HI} \left(\frac{I}{K_I} \right) \\
+\frac{dW}{dt} &= r_W W \left(1 - \frac{W}{K_W} \right) \\
+\frac{dA}{dt} &= r_A A \left(1 - \frac{A}{K_A} \right) + \alpha_{AW} \left(\frac{W}{K_W} \right) \\
+\frac{dI}{dt} &= r_I I \left(1 - \frac{I}{K_I} \right)
+\end{aligned}
+""")
+
+# Explanation for users with a math/science background
+with st.expander("📊 **Mathematical Explanation**"):
+    st.write("""
+    - Each equation describes the growth of a variable over time using **logistic growth**.
+    - The general form for growth is:  
+      \[
+      \frac{dX}{dt} = r_X X \left(1 - \frac{X}{K_X} \right)
+      \]
+      where:
+      - \(X\) is a variable (e.g., \(C\), \(H\), etc.).
+      - \(r_X\) is the growth rate.
+      - \(K_X\) is the carrying capacity (maximum limit).
+    - **Interactions:**  
+      - \(H\) (hemoglobin) is influenced by \(I\) (iron) via \(\alpha_{HI}\).
+      - \(A\) (albumin) is influenced by \(W\) (weight) via \(\alpha_{AW}\).
+    - The **extra term \(\delta\)** in \(dC/dt\) modifies the standard logistic growth.
+
+    This system models how different biomarkers interact and evolve over time.
+    """)
+
+# Explanation for users without a math background
+with st.expander("🧑‍🤝‍🧑 **Simple Explanation**"):
+    st.write("""
+    - Imagine each variable as a population (e.g., trees in a forest).
+    - They **grow** at their own rate but have a **limit** (you can't have infinite trees).
+    - Some variables **help** others grow:
+      - Hemoglobin (\(H\)) gets a boost from iron (\(I\)).
+      - Albumin (\(A\)) gets a boost from weight (\(W\)).
+    - The extra \(\delta\) in \(C\) makes it grow differently than the others.
+    - Over time, these factors create a balance in the system.
+    """)
+
+st.write("This system helps us understand how different biomarkers change over time and influence each other.")
+
+
 # Sidebar parameters
 st.sidebar.title("Adjust Parameters")
 
