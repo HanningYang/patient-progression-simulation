@@ -284,92 +284,38 @@ st.latex(r"""
 
 # Explanation with full LaTeX
 with st.expander("📊 **Mathematical Explanation**"):
-    st.latex(r"""
-    \textbf{Growth Terms:} \quad \frac{dX}{dt} = r_X X \left(1 - \frac{X}{K_X} \right)
-    """)
-    st.latex(r"""
-    \text{where } X \in \{C, H, W, A, I\}
-    """)
-    st.latex(r"""
-    \begin{aligned}
-    &\bullet \quad \text{Each biomarker } X \text{ follows a \textbf{logistic growth model}.} \\
-    &\bullet \quad \text{The term } r_X X \text{ represents \textbf{natural growth}.} \\
-    &\bullet \quad \text{The factor } \left(1 - \frac{X}{K_X} \right) \text{ ensures that growth slows} \\
-    &\quad \quad \text{as } X \text{ approaches its \textbf{carrying capacity} } K_X.
-    \end{aligned}
+    st.markdown(r"""
+    **Growth Terms:**
+    
+    $$ \frac{dX}{dt} = r_X X \left(1 - \frac{X}{K_X} \right) $$
+    
+    where \( X \in \{C, H, W, A, I\} \).
+    
+    - Each biomarker \( X \) follows a **logistic growth model**.  
+    - The term \( r_X X \) represents **natural growth**.  
+    - The factor \( \left(1 - \frac{X}{K_X} \right) \) ensures that growth slows  
+      as \( X \) approaches its **carrying capacity** \( K_X \).  
     """)
 
-    st.latex(r"""
-    \textbf{Interaction Terms:} \quad \alpha_{HI} \frac{I}{K_I}, \quad \alpha_{AW} \frac{W}{K_W}
-    """)
-    st.latex(r"""
-    \begin{aligned}
-    &\bullet \quad \text{Some biomarkers depend on others:} \\
-    &\bullet \quad H \text{ (Hemoglobin) receives an \textbf{additional boost} from } I \text{ (Iron), scaled by } \alpha_{HI}. \\
-    &\bullet \quad A \text{ (Albumin) increases with } W \text{ (Weight), controlled by } \alpha_{AW}.
-    \end{aligned}
-    """)
-
-    st.latex(r"""
-    \textbf{Extra Growth Modification:} \quad (r_C + \delta) C \left(1 - \frac{C}{K_C} \right)
-    """)
-    st.latex(r"""
-    \begin{aligned}
-    &\bullet \quad \text{Unlike other biomarkers, } C \text{ (CRP) has an \textbf{additional term} } \delta \text{ modifying its growth rate.}
-    \end{aligned}
+    st.markdown(r"""
+    **Interaction Terms:**
+    
+    $$ \alpha_{HI} \frac{I}{K_I}, \quad \alpha_{AW} \frac{W}{K_W} $$
+    
+    - Some biomarkers depend on others:  
+      - \( H \) (Hemoglobin) receives an **additional boost** from \( I \) (Iron),  
+        scaled by \( \alpha_{HI} \).  
+      - \( A \) (Albumin) increases with \( W \) (Weight), controlled by \( \alpha_{AW} \).  
     """)
 
-# Simple Explanation with Full LaTeX Formatting
-with st.expander("🧑‍🤝‍🧑 **Simple Explanation Using Math**"):
-    st.latex(r"""
-    \frac{dX}{dt} = \text{Growth} + \text{Influence from Others}
-    """)
-    st.latex(r"""
-    \begin{aligned}
-    &\bullet \quad \text{The equation } \frac{dX}{dt} \text{ describes \textbf{how a biomarker changes over time}.} \\
-    &\bullet \quad \text{Growth follows the rule:}
-    \end{aligned}
-    """)
-    st.latex(r"""
-    \frac{dX}{dt} = r_X X \left(1 - \frac{X}{K_X} \right)
-    """)
-    st.latex(r"""
-    \begin{aligned}
-    &\bullet \quad \text{Growth is limited by the \textbf{carrying capacity} } K_X, \text{ ensuring that } X \text{ does not grow indefinitely.}
-    \end{aligned}
+    st.markdown(r"""
+    **Extra Growth Modification:**
+    
+    $$ (r_C + \delta) C \left(1 - \frac{C}{K_C} \right) $$
+    
+    - Unlike other biomarkers, \( C \) (CRP) has an **additional term** \( \delta \) modifying its growth rate.  
     """)
 
-    st.latex(r"""
-    \begin{aligned}
-    &\bullet \quad \text{Some biomarkers are \textbf{linked}:} \\
-    \end{aligned}
-    """)
-    st.latex(r"""
-    \frac{dH}{dt} = r_H H \left(1 - \frac{H}{K_H} \right) + \alpha_{HI} \frac{I}{K_I}
-    """)
-    st.latex(r"""
-    \begin{aligned}
-    &\bullet \quad H \text{ (Hemoglobin) grows when } I \text{ (Iron) is high.}
-    \end{aligned}
-    """)
-
-    st.latex(r"""
-    \frac{dA}{dt} = r_A A \left(1 - \frac{A}{K_A} \right) + \alpha_{AW} \frac{W}{K_W}
-    """)
-    st.latex(r"""
-    \begin{aligned}
-    &\bullet \quad A \text{ (Albumin) grows when } W \text{ (Weight) is high.}
-    \end{aligned}
-    """)
-
-    st.latex(r"""
-    \frac{dC}{dt} = (r_C + \delta) C \left(1 - \frac{C}{K_C} \right)
-    """)
-    st.latex(r"""
-    \begin{aligned}
-    &\bullet \quad \text{The term } \delta \text{ \textbf{modifies} how } C \text{ (CRP) grows, making it different from the others.}
-    \end{aligned}
-    """)
 
 with st.expander("🧑‍🤝‍🧑 **Simple Explanation Using Math**"):
     st.markdown(r"""
