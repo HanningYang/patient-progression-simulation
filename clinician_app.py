@@ -262,7 +262,21 @@ Welcome to **RDEB Patient Progression Simulation App**. This app allows you to a
 """)
 
 
-# Displaying the ODE System with LaTeX
+st.write("""
+We simulate **5 biomarkers** in EB patients:
+""")
+
+st.markdown("""
+- **C (CRP)** - Inflammatory marker  
+- **H (Hemoglobin)** - Oxygen-carrying protein  
+- **B (BMI)** - Body Mass Index  
+- **A (Albumin)** - Protein linked to nutrition & liver function  
+- **I (Iron)** - Essential mineral for blood function  
+""")
+
+st.header("ODE System for EB Biomarkers")
+
+# Display the ODE System
 st.latex(r"""
 \begin{aligned}
 \frac{dC}{dt} &= (r_C + \delta) C \left(1 - \frac{C}{K_C} \right) \\
