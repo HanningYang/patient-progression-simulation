@@ -282,51 +282,71 @@ st.latex(r"""
 \end{aligned}
 """)
 
-# Explanation with mathematical notation
+# Explanation with full LaTeX
 with st.expander("📊 **Mathematical Explanation**"):
     st.latex(r"""
     \textbf{Growth Terms:} \quad \frac{dX}{dt} = r_X X \left(1 - \frac{X}{K_X} \right)
     """)
+    st.latex(r"""
+    \text{where } X \in \{C, H, W, A, I\}
+    """)
     st.write("""
-    - Each variable \( X \) (e.g., \( C, H, W, A, I \)) follows a **logistic growth model**.
+    - Each biomarker \( X \) follows a **logistic growth model**.
     - The term \( r_X X \) represents **natural growth**.
-    - The factor \( \left(1 - \frac{X}{K_X} \right) \) ensures that growth slows as \( X \) approaches its limit \( K_X \) (carrying capacity).
+    - The factor \( \left(1 - \frac{X}{K_X} \right) \) ensures that growth slows as \( X \) approaches its **carrying capacity** \( K_X \).
     """)
 
     st.latex(r"""
     \textbf{Interaction Terms:} \quad \alpha_{HI} \frac{I}{K_I}, \quad \alpha_{AW} \frac{W}{K_W}
     """)
     st.write("""
-    - Some variables depend on others:
-      - Hemoglobin (\( H \)) receives an **additional boost** from iron (\( I \)), scaled by \( \alpha_{HI} \).
-      - Albumin (\( A \)) increases with weight (\( W \)), controlled by \( \alpha_{AW} \).
+    - Some biomarkers depend on others:
+      - Hemoglobin \( H \) receives an **additional boost** from iron \( I \), scaled by \( \alpha_{HI} \).
+      - Albumin \( A \) increases with weight \( W \), controlled by \( \alpha_{AW} \).
     """)
 
     st.latex(r"""
     \textbf{Extra Growth Modification:} \quad (r_C + \delta) C \left(1 - \frac{C}{K_C} \right)
     """)
     st.write("""
-    - Unlike the other variables, \( C \) has an **additional term** \( \delta \) that modifies its growth rate.
+    - Unlike other biomarkers, \( C \) has an **additional term** \( \delta \) modifying its growth rate.
     """)
 
-# Simple Explanation with Math Format
+# Simple Explanation with Full LaTeX Formatting
 with st.expander("🧑‍🤝‍🧑 **Simple Explanation Using Math**"):
-    st.write("""
-    - Each equation describes **how a variable changes over time**.
-    - The formula \( \frac{dX}{dt} \) means **"the change in X over time."**
-    - Growth follows this rule:  
-      \[
-      \frac{dX}{dt} = \text{Growth} + \text{Influence from Others}
-      \]
-    - Growth is limited:  
-      \[
-      \text{Growth Rate} \times \left( 1 - \frac{\text{Current Value}}{\text{Maximum Value}} \right)
-      \]
-    - Some variables are **linked**:
-      - \( H \) grows when \( I \) is large.
-      - \( A \) grows when \( W \) is large.
-    - The term \( \delta \) **changes** how \( C \) grows.
+    st.latex(r"""
+    \frac{dX}{dt} = \text{Growth} + \text{Influence from Others}
     """)
+    st.write("""
+    - The equation \( \frac{dX}{dt} \) describes **how a biomarker changes over time**.
+    - Growth follows the rule:  
+    """)
+    st.latex(r"""
+    \frac{dX}{dt} = r_X X \left(1 - \frac{X}{K_X} \right)
+    """)
+    st.write("""
+    - Growth is limited by the **carrying capacity** \( K_X \), ensuring that \( X \) does not grow indefinitely.
+    - Some biomarkers are **linked**:
+    """)
+    st.latex(r"""
+    \frac{dH}{dt} = r_H H \left(1 - \frac{H}{K_H} \right) + \alpha_{HI} \frac{I}{K_I}
+    """)
+    st.write("""
+    - Hemoglobin \( H \) grows **when iron \( I \) is high**.
+    """)
+    st.latex(r"""
+    \frac{dA}{dt} = r_A A \left(1 - \frac{A}{K_A} \right) + \alpha_{AW} \frac{W}{K_W}
+    """)
+    st.write("""
+    - Albumin \( A \) grows **when weight \( W \) is high**.
+    """)
+    st.latex(r"""
+    \frac{dC}{dt} = (r_C + \delta) C \left(1 - \frac{C}{K_C} \right)
+    """)
+    st.write("""
+    - The term \( \delta \) **modifies** how \( C \) (CRP) grows, making it different from the others.
+    """)
+
 
 st.markdown("""
 **Instructions:**
