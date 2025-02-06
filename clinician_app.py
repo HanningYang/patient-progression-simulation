@@ -371,6 +371,26 @@ with st.expander("🧑‍🤝‍🧑 **Simple Explanation Using Math**"):
     \end{aligned}
     """)
 
+with st.expander("🧑‍🤝‍🧑 **Simple Explanation Using Math**"):
+    st.markdown(r"""
+    $$ \frac{dX}{dt} = \text{Growth} + \text{Influence from Others} $$
+
+    - The equation $ \frac{dX}{dt} $ describes **how a biomarker changes over time**.  
+    - Growth follows the rule:  
+      $$ \frac{dX}{dt} = r_X X \left(1 - \frac{X}{K_X} \right) $$  
+    - Growth is limited by the **carrying capacity** $ K_X $, ensuring that $ X $ does not grow indefinitely.
+
+    - Some biomarkers are **linked**:  
+      $$ \frac{dH}{dt} = r_H H \left(1 - \frac{H}{K_H} \right) + \alpha_{HI} \frac{I}{K_I} $$
+      - Hemoglobin $ H $ grows when iron $ I $ is high.  
+      $$ \frac{dA}{dt} = r_A A \left(1 - \frac{A}{K_A} \right) + \alpha_{AW} \frac{W}{K_W} $$
+      - Albumin $ A $ grows when weight $ W $ is high.  
+
+    - The term $ \delta $ **modifies** how $ C $ (CRP) grows, making it different from the others:  
+      $$ \frac{dC}{dt} = (r_C + \delta) C \left(1 - \frac{C}{K_C} \right) $$
+    """)
+
+
 
 
 st.markdown("""
